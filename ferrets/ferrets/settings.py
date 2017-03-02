@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'ferreted_away'
+    'ferreted_away',
 ]
 
 MIDDLEWARE = [

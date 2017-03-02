@@ -19,7 +19,7 @@ from django.conf.urls import include
 from ferreted_away import views
 
 urlpatterns = [
-    url(r'^$', views.home, name='home'),
     url(r'^admin/', admin.site.urls),
-    
+    url(r'^', include('ferreted_away.urls')),
+
 ]

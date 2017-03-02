@@ -5,45 +5,41 @@ def home(request):
 
 
 def about(request):
-    return HttpResponse("Home")
+    return HttpResponse("About")
 
 
 def faq(request):
-    return HttpResponse("Home")
-
-
+    return HttpResponse("FAQ")
 
 def contact(request):
-    return HttpResponse("Home")
-
-
+    return HttpResponse("Contact")
 
 def sitemap(request):
-    return HttpResponse("Home")
+    return HttpResponse("Sitemap")
 
 def login(request):
-    return HttpResponse("Home")
+    return HttpResponse("Login")
 
 def addAccount(request):
-    return HttpResponse("Home")
+    return HttpResponse("Add Account")
 
 def myAccount(request):
-    return HttpResponse("Home")
+    return HttpResponse("My Account")
 
-def MyItems(request):
-    return HttpResponse("Home")
+def myItems(request):
+    return HttpResponse("My Items")
 
-def Additems(request):
-    return HttpResponse("Home")
+def addItems(request):
+    return HttpResponse("Add Items")
 
-def MyWatchlist(request):
-    return HttpResponse("Home")
+def myWatchlist(request):
+    return HttpResponse("My Watchlist")
 
-def Categories(request):
-    return HttpResponse("Home")  .
+def categories(request):
+    return HttpResponse("Categories")
 
-def CategoriesSearch(request):
-    return HttpResponse("Home")
+def showCategory(request):
+    return HttpResponse("Show Category")
 
-def Item(request):
-    return HttpResponse("Home")
+def showItem(request):
+    return HttpResponse("Show Item")
