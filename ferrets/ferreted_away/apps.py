@@ -3,5 +3,5 @@ from __future__ import unicode_literals
 from django.apps import AppConfig
 
 
-class CategoriesConfig(AppConfig):
-    name = 'categories'
+class FerretedAwayConfig(AppConfig):
+    name = 'ferreted_away'
