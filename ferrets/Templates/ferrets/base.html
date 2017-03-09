@@ -1,12 +1,14 @@
-<!DOCTYPE HTML>
-
+<!DOCTYPE html>
+{% load staticfiles %}
+{% load ferreted_away_template_tags %}
 
 <html>
 <head>
 	<title>
-		Ferreted Away 
+		Ferreted Away
+		{% block title_block %}
+		{% endblock %}
 	</title>
-	
 	<link rel="stylesheet" type="text/css" href="H:\WAD\ferrets\ferrets\Templates\ferrets\style.css">
 </head>
 <body>
@@ -23,12 +25,12 @@
 				<ul><li>1</li><li>2</li></ul>
 			</ul>
 		</div>
+		
 		<div id="content">
-			<h1>Welcome to Ferreted Away!</h1>
-			<p>Ferreted Away is a site made for student, by students. It's like StudentVoice meets GumTree, but better.
-			On Ferreted Away you can buy and sell anything, and it's completely free to join.
-			This is the page content
+		{% block content %}
+		{% endblock %}
 		</div>
+		
 		<div id="infobar">
 			<a href="{% url 'about' %}">About</a> | 
 			<a href="{% url 'contact' %}">Contact</a> | 
@@ -36,6 +38,6 @@
 			<a href="{% url 'faq' %}">FAQ</a>
 		</div>
 	</div>
-</div>
 </body>
 </html>
+	
