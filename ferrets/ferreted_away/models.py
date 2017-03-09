@@ -40,3 +40,8 @@ class Watchlist(models.Model):
     user = models.ForeignKey(User)
     item = models.ForeignKey(Item)
 
+class Comments(models.Model):
+    user = models.ForeignKey(User)
+    item = models.ForeignKey(Item)
+    comment = models.TextField(max_length=360, blank=True)
+    date_added = models.DateTimeField(auto_now=False, auto_now_add=True)
