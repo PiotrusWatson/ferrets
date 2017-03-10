@@ -1,11 +1,13 @@
 from django.http import HttpResponseRedirect, HttpResponse
 
 def home(request):
-    return HttpResponse("Home")
+    context_dict = {'stuff':'place holder stuff'}
+    return render(request, 'ferreted_away/index.html', context_dict)
 
 
 def about(request):
-    return HttpResponse("About")
+    context_dict = {'stuff':'place holder stuff'}
+    return render(request, 'ferreted_away/about.html', context_dict)
 
 
 def faq(request):
