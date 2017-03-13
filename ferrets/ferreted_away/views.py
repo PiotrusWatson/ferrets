@@ -1,11 +1,12 @@
 from django.http import HttpResponseRedirect, HttpResponse
+from django.shortcuts import render
 
 def home(request):
-    return HttpResponse("Home")
+    return render(request, "ferrets/home.html")
 
 
 def about(request):
-    return HttpResponse("About")
+    return render(request, "ferrets/about2.html")
 
 
 def faq(request):
