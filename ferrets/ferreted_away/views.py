@@ -2,11 +2,14 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 
 def home(request):
-    return render(request, "ferrets/home.html")
+    context_dict = {'stuff':'place holder stuff'}
+    return render(request, 'ferrets/index.html', context_dict)
 
 
 def about(request):
-    return render(request, "ferrets/about2.html")
+    context_dict = {'stuff':'place holder stuff'}
+    return render(request, 'ferrets/about.html', context_dict)
+
 
 
 def faq(request):
