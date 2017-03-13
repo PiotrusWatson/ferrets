@@ -2,9 +2,12 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from ferreted_away.models import Item, Watchlist, Category
 
 def home(request):
-    context_dict = {'stuff':'place holder stuff'}
+    item_list = Item.objects.order_by("-views")[:3]
+
+    context_dict = {'items': item_list}
     return render(request, 'ferrets/index.html', context_dict)
 
 
@@ -32,11 +35,18 @@ def addAccount(request):
 
 #@login_required
 def myAccount(request):
-    return render(request, "ferrets/myaccount.html")
+    my_items = Item.objects.filter(user=request.user.user).order_by("-date_added")[:5]
+    my_watchlist = Watchlist.filter(user=request.user.user).order_by("-date_added")[:5]
+
+    context_dict = {"my_items":my_items, "my_watchlist":my_watchlist}
+    return render(request, "ferrets/myaccount.html", context_dict)
 
 #@login_required
 def myItems(request):
-    return render(request, "ferrets/myitems.html")
+    items = Item.objects.filter(user=request.user.user)
+
+    context_dict = {"items": items}
+    return render(request, "ferrets/myitems.html", context_dict)
 
 #@login_required
 def addItems(request):
@@ -44,9 +54,17 @@ def addItems(request):
 
 #@login_required
 def myWatchlist(request):
-    return render(request, "ferrets/mywatchlist.html")
+    watchlist = Watchlist.filter(user=request.user.user)
+
+    context_dict = {"watchlist": watchlist}
+    return render(request, "ferrets/mywatchlist.html", context_dict)
+
 def categories(request):
-    return render(request, "ferrets/categories.html")
+    categories = Category.objects.all()
+
+    context_dict ={"categories": categories}
+
+    return render(request, "ferrets/categories.html", context_dict)
 
 def showCategory(request):
     return render(request, "ferrets/showcategory.html")
