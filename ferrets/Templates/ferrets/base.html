@@ -5,14 +5,14 @@
 <head>
 	<title>
 		Ferreted Away
-		{% block title_block %}
-		{% endblock %}
+	{% block title_block %}	
+	{% endblock %}
 	</title>
-	<link rel="stylesheet" type="text/css" href="H:\WAD\ferrets\ferrets\Templates\ferrets\style.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/ferrets.css' %}">
 </head>
 <body>
 	<div id="header">
-		<div id="logo"><img src="FerretedAwayLogo.png" alt="logo" height="130px"/></div> 
+		<div id="logo"><img src="{% static 'images/FerretedAwayLogo.png' %}" alt="logo" height="130px"/></div> 
 		<div class="headerText">erreted Away</div>
 	</div>
 	<div id="contentwrapper">

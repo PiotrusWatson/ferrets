@@ -1,41 +1,15 @@
-<!DOCTYPE HTML>
+{% extends 'ferrets/base.html' %}
+{% load staticfiles %}
 
-
-<html>
-<head>
-	<title>
-		Ferreted Away 
-	</title>
+{% block title_block %}
+		- Home
+{% endblock %}
 	
-	<link rel="stylesheet" type="text/css" href="H:\WAD\ferrets\ferrets\Templates\ferrets\style.css">
-</head>
-<body>
-	<div id="header">
-		<div id="logo"><img src="FerretedAwayLogo.png" alt="logo" height="130px"/></div> 
-		<div class="headerText">erreted Away</div>
-	</div>
-	<div id="contentwrapper">
-		<div id="sidebar">
-			<p>This is the sidebar.
-			<ul>
-				<li>Home</li>
-				<li>Categories</li>
-				<ul><li>1</li><li>2</li></ul>
-			</ul>
-		</div>
-		<div id="content">
-			<h1>Welcome to Ferreted Away!</h1>
-			<p>Ferreted Away is a site made for student, by students. It's like StudentVoice meets GumTree, but better.
-			On Ferreted Away you can buy and sell anything, and it's completely free to join.
-			This is the page content
-		</div>
-		<div id="infobar">
-			<a href="{% url 'about' %}">About</a> | 
-			<a href="{% url 'contact' %}">Contact</a> | 
-			<a href="{% url 'sitemap' %}">Site Map </a>| 
-			<a href="{% url 'faq' %}">FAQ</a>
-		</div>
-	</div>
+{% block content %}
+<div id="content">
+<h1>Welcome to Ferreted Away!</h1>
+<p>Ferreted Away is a site made for student, by students. It's like StudentVoice meets GumTree, but better.
+On Ferreted Away you can buy and sell anything, and it's completely free to join.
+This is the page content
 </div>
-</body>
-</html>
+{% endblock %}
