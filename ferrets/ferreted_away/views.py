@@ -1,5 +1,7 @@
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 def home(request):
     context_dict = {'stuff':'place holder stuff'}
@@ -13,37 +15,41 @@ def about(request):
 
 
 def faq(request):
-    return HttpResponse("FAQ")
+    return render(request, "ferrets/faq.html")
 
 def contact(request):
-    return HttpResponse("Contact")
+    return render(request, "ferrets/contact.html")
 
 def sitemap(request):
-    return HttpResponse("Sitemap")
+    return render(request, "ferrets/sitemap.html")
+
 
 def login(request):
-    return HttpResponse("Login")
+    return render(request, "ferrets/login.html")
 
 def addAccount(request):
-    return HttpResponse("Add Account")
+    return render(request, "ferrets/addaccount.html")
 
+#@login_required
 def myAccount(request):
-    return HttpResponse("My Account")
+    return render(request, "ferrets/myaccount.html")
 
+#@login_required
 def myItems(request):
-    return HttpResponse("My Items")
+    return render(request, "ferrets/myitems.html")
 
+#@login_required
 def addItems(request):
-    return HttpResponse("Add Items")
+    return render(request, "ferrets/additems.html")
 
+#@login_required
 def myWatchlist(request):
-    return HttpResponse("My Watchlist")
-
+    return render(request, "ferrets/mywatchlist.html")
 def categories(request):
-    return HttpResponse("Categories")
+    return render(request, "ferrets/categories.html")
 
 def showCategory(request):
-    return HttpResponse("Show Category")
+    return render(request, "ferrets/showcategory.html")
 
 def showItem(request):
-    return HttpResponse("Show Item")
+    return render(request, "ferrets/showitem.html")
