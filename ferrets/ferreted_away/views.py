@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.shortcuts import render
 from ferreted_away.models import Category, Item, User, Watchlist
+from ferreted_away.forms import UserForm, UserProfileForm
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 
@@ -61,8 +62,32 @@ def login(request):
 
 def addAccount(request):
 
+    registered = False
 
-    return render(request, "ferrets/addaccount.html")
+    if request.method == 'POST':
+        user_form = UserForm(data=request.POST)
+
+        if user_form.is_valid():
+            user = user_form.save()
+
+            user.set_password(user.password)
+            user.save()
+
+            if 'picture' in request.FILES:
+                user.picture = request.FILES['picture']
+
+            user.save()
+
+            registered = True
+            return HttpResponseRedirect(reverse('myAccount'))
+        else:
+            print(user_form.errors)
+    else:
+        user_form = UserForm()
+
+    return render(request, 'ferrets/addaccount.html', {'user_form': user_form,
+                                                   'registered': registered})
+
 
 @login_required
 def myAccount(request):
