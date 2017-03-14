@@ -33,6 +33,7 @@ class Item(models.Model):
 
 class User(models.Model):
     user = models.OneToOneField(User)
+    username = models.CharField(max_length=128, blank=True)
     email = models.EmailField(max_length=254, blank=True)
     picture = models.ImageField(upload_to='profile_images', blank=True)
 

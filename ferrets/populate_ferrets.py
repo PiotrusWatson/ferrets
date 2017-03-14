@@ -1,5 +1,6 @@
 import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ferrets.settings')
+import random
 import django
 django.setup()
 from ferreted_away.models import Category, Item, User
@@ -95,19 +96,20 @@ def populate():
             "Other": {"items": other_items}}
 
     #adds all the stuff above to the database
-
-    u = add_user(sample_user["user"], sample_user["email"])
-    for cat, cat_data in cats.items():
-        c = add_cat(cat)
-        for i in cat_data["items"]:
-            add_item(c, u["user"], i["item_name"], i["price"], i["description"])
+    for u in sample_user:
+        u = add_user(u["user"], u["email"])
+        for cat, cat_data in cats.items():
+            c = add_cat(cat)
+            for i in cat_data["items"]:
+                add_item(c, u["user"], i["item_name"], i["price"], i["description"])
 
     for c in Category.objects.all():
         for i in Item.objects.filter(category=c):
             print("- {0} - {1}".format(str(c), str(i)))
 
 def add_user(name, email):
-    u=User.objects.get_or_create(user=name)[0]
+    u=User.objects.get_or_create(user=random.randint(0,100))[0]
+    u.name=name
     u.email=email
     u.save()
     return u
