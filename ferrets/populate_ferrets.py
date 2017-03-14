@@ -1,9 +1,8 @@
 import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ferrets.settings')
-
 import django
 django.setup()
-from rango.models import Category, Item, User
+from ferreted_away.models import Category, Item, User
 
 def populate():
     #basic user
@@ -94,3 +93,42 @@ def populate():
             "Clothes": {"items": clothes_items},
             "Books": {"items": books_items},
             "Other": {"items": other_items}}
+
+    #adds all the stuff above to the database
+
+    u = add_user(sample_user["user"], sample_user["email"])
+    for cat, cat_data in cats.items():
+        c = add_cat(cat)
+        for i in cat_data["items"]:
+            add_item(c, u["user"], i["item_name"], i["price"], i["description"])
+
+    for c in Category.objects.all():
+        for i in Item.objects.filter(category=c):
+            print("- {0} - {1}".format(str(c), str(i)))
+
+def add_user(name, email):
+    u=User.objects.get_or_create(user=name)[0]
+    u.email=email
+    u.save()
+    return u
+
+def add_item(cat, user, name, price, description, views=0):
+    i = Item.objects.get_or_create(category=cat, item_name=name)[0]
+    i.price=price
+    i.description=description
+    i.views=views
+    i.save()
+    return i
+
+def add_cat(name):
+    c = Category.objects.get_or_create(name=name)
+    c.save()
+    return c
+
+if __name__ == '__main__':
+    print("Starting ferreted_away population script...")
+    populate()
+
+
+
+
