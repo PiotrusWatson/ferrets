@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.shortcuts import render
 from ferreted_away.models import Category, Item, User, Watchlist
-from ferreted_away.forms import UserForm, UserProfileForm
+from ferreted_away.forms import UserForm
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 
