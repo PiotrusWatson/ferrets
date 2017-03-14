@@ -56,9 +56,12 @@ def login(request):
 
             return render(request, 'ferrets/login.html',{'message' :"Invalid Username or Password"})
 
-    return render(request, "ferrets/login.html")
+    else:
+        return render(request, "ferrets/login.html", {})
 
 def addAccount(request):
+
+
     return render(request, "ferrets/addaccount.html")
 
 @login_required
