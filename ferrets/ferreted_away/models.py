@@ -28,6 +28,9 @@ class Item(models.Model):
     views = models.IntegerField(default=0)
     date_added = models.DateTimeField(auto_now=False, auto_now_add=True)
 
+    def __str__(self):
+        return self.item_name
+
 class User(models.Model):
     user = models.OneToOneField(User)
     email = models.EmailField(max_length=254, blank=True)
@@ -45,3 +48,6 @@ class Comments(models.Model):
     item = models.ForeignKey(Item)
     comment = models.TextField(max_length=360, blank=True)
     date_added = models.DateTimeField(auto_now=False, auto_now_add=True)
+
+    def __str__(self):
+        return self.comment
