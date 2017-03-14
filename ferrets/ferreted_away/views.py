@@ -20,7 +20,7 @@ def home(request):
                         'watched': watched_list,
                         }
 
-    return render(request, 'ferrets/home.html', context=context_dict)
+    return render(request, 'ferrets/Home.html', context=context_dict)
 
 
 def about(request):
@@ -115,6 +115,11 @@ def myWatchlist(request):
     context_dict = {"watchlist": watchlist}
     return render(request, "ferrets/mywatchlist.html", context_dict)
 
+@login_required
+def user_logout(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('Home'))
+
 def categories(request):
     categories = Category.objects
 
@@ -122,8 +127,25 @@ def categories(request):
 
     return render(request, "ferrets/categories.html", context_dict)
 
-def showCategory(request):
-    return render(request, "ferrets/showcategory.html")
+def showCategory(request, category_name_slug):
+
+    context_dict = {}
+
+    try:
+        category = Category.objects.get(slug=category_name_slug)
+
+        items = Item.objects.filter(category=category).order_by('-views')
+
+        context_dict['items'] = items
+
+        context_dict['category'] = category
+
+    except Category.DoesNotExist:
+
+        context_dict['category'] = None
+        context_dict['pages'] = None
+
+    return render(request, 'ferrets/category.html', context_dict)
 
 def showItem(request):
     return render(request, "ferrets/showitem.html")
