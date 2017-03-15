@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.shortcuts import render
 from ferreted_away.models import Category, Item, UserProfile, Watchlist
-from ferreted_away.forms import UserForm
+from ferreted_away.forms import UserForm, UserProfileForm
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 
@@ -15,7 +15,7 @@ def home(request):
                     }
 
     if request.user.is_authenticated():
-        watched_list = Watchlist.filter(user=request.user.user).order_by("-date_added")[:5]
+        watched_list = Watchlist.filter(user=request.user).order_by("-date_added")[:5]
         context_dict = {'items': item_list,
                         'watched': watched_list,
                         }
@@ -61,55 +61,71 @@ def login(request):
         return render(request, "ferrets/login.html", {})
 
 def addAccount(request):
-
     registered = False
 
     if request.method == 'POST':
         user_form = UserForm(data=request.POST)
+        profile_form = UserProfileForm(data=request.POST)
 
-        if user_form.is_valid():
+        if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
 
             user.set_password(user.password)
             user.save()
 
+            profile = profile_form.save(commit=False)
+            profile.user = user
+            if 'picture' in request.FILES:
+                profile.picture = request.FILES['picture']
+
+            profile.save()
 
             registered = True
-            return HttpResponseRedirect(reverse('myAccount'))
         else:
-            print(user_form.errors)
+            print(user_form.errors, profile_form.errors)
     else:
-        user_form = UserForm()
 
-    return render(request, 'ferrets/addaccount.html', {'user_form': user_form,
+        user_form = UserForm()
+        profile_form = UserProfileForm()
+
+    return render(request, 'rango/register.html', {'user_form': user_form,
+                                                   'profile_form': profile_form,
                                                    'registered': registered})
 
 
 @login_required
 def myAccount(request):
-    my_items = Item.objects.filter(user=request.user.user).order_by("-date_added")[:5]
-    my_watchlist = Watchlist.filter(user=request.user.user).order_by("-date_added")[:5]
+    my_items = Item.objects.filter(user=request.user).order_by("-date_added")[:5]
+    my_watchlist = Watchlist.filter(user=request.user).order_by("-date_added")[:5]
 
-    context_dict = {"my_items":my_items, "my_watchlist":my_watchlist}
+    context_dict = {"my_items":my_items, "my_watchlist":my_watchlist, "user":request.user}
     return render(request, "ferrets/myaccount.html", context_dict)
 
 @login_required
 def myItems(request):
-    items = Item.objects.filter(user=request.user.user)
+    items = Item.objects.filter(user=request.user)
 
     context_dict = {"items": items}
     return render(request, "ferrets/myitems.html", context_dict)
 
+##To implement
 @login_required
 def addItems(request):
+
+
+
     return render(request, "ferrets/additems.html")
+
+
 
 @login_required
 def myWatchlist(request):
-    watchlist = Watchlist.filter(user=request.user.user).order_by("-date_added")[:5]
+    watchlist = Watchlist.filter(user=request.user).order_by("-date_added")[:5]
 
     context_dict = {"watchlist": watchlist}
     return render(request, "ferrets/mywatchlist.html", context_dict)
+
+
 
 @login_required
 def user_logout(request):
@@ -122,6 +138,7 @@ def categories(request):
     context_dict ={"categories": categories}
 
     return render(request, "ferrets/categories.html", context_dict)
+
 
 def showCategory(request, category_name_slug):
 
@@ -143,5 +160,12 @@ def showCategory(request, category_name_slug):
 
     return render(request, 'ferrets/category.html', context_dict)
 
+
+
+## To implement
 def showItem(request):
+
+
+
+
     return render(request, "ferrets/showitem.html")
