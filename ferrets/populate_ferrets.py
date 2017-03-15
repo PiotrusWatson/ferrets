@@ -110,9 +110,10 @@ def populate():
             print("- {0} - {1}".format(str(c), str(i)))
 
 def add_user(sample_user):
+    u, created = User.objects.get_or_create(username=sample_user["user"])
     u.set_password(sample_user["password"])
     u.save()
-    up = UserProfile.objects.get_or_create(user=u, email=sample_user["email"])
+    up, created = UserProfile.objects.get_or_create(user=u, email=sample_user["email"])
     up.save()
     return up
 
