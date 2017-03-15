@@ -5,15 +5,14 @@ import django
 django.setup()
 
 from django.contrib.auth.models import User
-from ferreted_away.models import Category, Item, User
+from ferreted_away.models import Category, Item, UserProfile
 
 def populate():
     #basic user
-    sample_user = [
-        {"user": "fredrick",
+    sample_user = {"user": "fredrick",
          "email": "fredricksemail@gmail.com",
          "password": "fred123rick"}
-    ]
+
     #items
     transport_items = [
         {"item_name": "Rollerskates",
@@ -100,22 +99,22 @@ def populate():
 
     #adds all the stuff above to the database
     
-    u = add_user(sample_user)
+    up = add_user(sample_user)
     for cat, cat_data in cats.items():
         c = add_cat(cat)
         for i in cat_data["items"]:
-            add_item(c, u, i["item_name"], i["price"], i["description"])
+            add_item(c, up, i["item_name"], i["price"], i["description"])
 
     for c in Category.objects.all():
         for i in Item.objects.filter(category=c):
             print("- {0} - {1}".format(str(c), str(i)))
 
 def add_user(sample_user):
-    u = User.objects.get_or_create(username=sample_user["user"])
     u.set_password(sample_user["password"])
-    u = UserProfile.objects.get_or_create(email=sample_user["email"])
     u.save()
-    return u
+    up = UserProfile.objects.get_or_create(user=u, email=sample_user["email"])
+    up.save()
+    return up
 
 def add_item(cat, user, name, price, description, views=0):
     i = Item.objects.get_or_create(category=cat, item_name=name)[0]
