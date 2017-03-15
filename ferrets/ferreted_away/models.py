@@ -31,9 +31,8 @@ class Item(models.Model):
     def __str__(self):
         return self.item_name
 
-class User(models.Model):
+class UserProfile(models.Model):
     user = models.OneToOneField(User)
-    username = models.CharField(max_length=128, blank=True)
     email = models.EmailField(max_length=254, blank=True)
     picture = models.ImageField(upload_to='profile_images', blank=True)
 
