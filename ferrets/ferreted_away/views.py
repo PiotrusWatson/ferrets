@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.shortcuts import render
-from ferreted_away.models import Category, Item, User, Watchlist
+from ferreted_away.models import Category, Item, UserProfile, Watchlist
 from ferreted_away.forms import UserForm
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
@@ -73,10 +73,6 @@ def addAccount(request):
             user.set_password(user.password)
             user.save()
 
-            if 'picture' in request.FILES:
-                user.picture = request.FILES['picture']
-
-            user.save()
 
             registered = True
             return HttpResponseRedirect(reverse('myAccount'))

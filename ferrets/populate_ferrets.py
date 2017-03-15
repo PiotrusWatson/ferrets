@@ -9,7 +9,7 @@ from ferreted_away.models import Category, Item, UserProfile
 
 def populate():
     #basic user
-    sample_user = {"user": "fredrick",
+    sample_user = {"username": "fredrick",
          "email": "fredricksemail@gmail.com",
          "password": "fred123rick"}
 
@@ -110,23 +110,22 @@ def populate():
             print("- {0} - {1}".format(str(c), str(i)))
 
 def add_user(sample_user):
-    u, created = User.objects.get_or_create(username=sample_user["user"])
-    u.set_password(sample_user["password"])
+    u, created = User.objects.get_or_create(sample_user)
+    u.set_password(u.password)
     u.save()
-    up, created = UserProfile.objects.get_or_create(user=u, email=sample_user["email"])
-    up.save()
-    return up
+##    up, created = UserProfile.objects.get_or_create(user=u, email=sample_user["email"])
+##    up.save()
+    return u
 
 def add_item(cat, user, name, price, description, views=0):
-    i = Item.objects.get_or_create(category=cat, item_name=name)[0]
-    i.price=price
+    i = Item.objects.get_or_create(category=cat, item_name=name, price=price, user = user)[0]
     i.description=description
     i.views=views
     i.save()
     return i
 
 def add_cat(name):
-    c = Category.objects.get_or_create(name=name)
+    c, created = Category.objects.get_or_create(name=name)
     c.save()
     return c
 

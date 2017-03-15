@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from ferreted_away.models import Category, Item, User
+from ferreted_away.models import Category, Item, UserProfile
 from datetime import datetime
 
 class ItemForm(forms.ModelForm):
@@ -29,5 +29,12 @@ class UserForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('user', 'email', 'password', 'picture')
+        fields = ('username', 'email', 'password')
+
+
+class UserProfileForm(forms.ModelForm):
+
+    class Meta:
+        model = UserProfile
+        fields = ('picture')
 

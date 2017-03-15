@@ -5,7 +5,6 @@ from django.db import models
 
 class Category(models.Model):
     name = models.CharField(max_length=128, unique=True)
-    views = models.IntegerField(default=0)
     slug = models.SlugField(unique=True)
 
     def save(self, *args, **kwargs):
@@ -33,7 +32,7 @@ class Item(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
-    email = models.EmailField(max_length=254, blank=True)
+
     picture = models.ImageField(upload_to='profile_images', blank=True)
 
     def __str__(self):
