@@ -63,6 +63,9 @@ h2 {
 	size: 14px;
 	color: 34abba;
 	text-transform: small caps;
+	a {
+		color: #000;
+	}
 }
 
 a {
@@ -75,8 +78,11 @@ a:hover {
 	color: #226d77;
 }
 
-a #h2 {
-	color: #000;
+#accomlink {
+	color: #333;
+}
+#accomlink:hover{
+	color: #fefefe;
 }
 
 cat {

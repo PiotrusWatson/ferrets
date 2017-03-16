@@ -10,31 +10,44 @@
 	<table style="width:70%">
 		<tr>
 			<td>
-				<p>
-				<h2>Accomodation</h2>
-				<div class="cat"><img src="{% static 'images/accomodation.jpg' %}" alt="accomodation" height="200px"/>
+				<a href="{{ category.accomodation }}">
+					<h2>Accomodation</h2>
+					<div class="cat"><img src="{% static 'images/accomodation.jpg' %}" alt="accomodation" height="200px"/>
+				</a>
 			</td>
 			<td>
-				<p><h2>Food</h2>
-				<div class="cat"><img src="{% static 'images/food.jpg' %}" alt="food" height="200px"/>
+				<a class="accomlink" href="{{ category.food }}">
+					<p><h2>Food</h2>
+					<div class="cat"><img src="{% static 'images/food.jpg' %}" alt="food" height="200px"/>
+				</a>
 			</td> 
 			<td>
-				<p><h2>Books</h2>
-				<div class="cat"><img src="{% static 'images/books.jpg' %}" alt="books" height="200px"/>
+				<a class="accomlink" href="{{ category.books }}">
+					<p><h2>Books</h2>
+					<div class="cat"><img src="{% static 'images/books.jpg' %}" alt="books" height="200px"/>
+				</a>
 			</td>
 		</tr>
+		
+		
 		<tr>
 			<td>
-				<p><h2>Other</h2>
-				<div class="cat"><img src="{% static 'images/other.jpg' %}" alt="other" height="200px"/>
+				<a class="accomlink" href="{{ category.other }}">
+					<p><h2>Other</h2>
+					<div class="cat"><img src="{% static 'images/other.jpg' %}" alt="other" height="200px"/>
+				</a>
 			</td>
 			<td>
-				<p><h2>Transport</h2>
-				<div class="cat"><img src="{% static 'images/car.jpg' %}" alt="transport" height="200px"/>
+				<a class="accomlink" href="{{ category.transport }}">
+					<p><h2>Transport</h2>
+					<div class="cat"><img src="{% static 'images/car.jpg' %}" alt="transport" height="200px"/>
+				</a>
 			</td> 
 			<td>
-				<p><h2>Clothes</h2>
-				<div class="cat"><img src="{% static 'images/clothes.jpg' %}" alt="clothes" height="200px"/>
+				<a class="accomlink" href="{{ category.clothes }}">
+					<p><h2>Clothes</h2>
+					<div class="cat"><img src="{% static 'images/clothes.jpg' %}" alt="clothes" height="200px"/>
+				</a>
 			</td>
 		</tr>
 	</table>	
