@@ -1,0 +1,41 @@
+{% extends 'ferrets/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+	- Browse by Price
+{% endblock %}
+
+{% block content %}
+	<h1>Browse by Price</h1>
+	<table style="width:80%">
+		<tr>
+			<td>
+				<a href="{% url 'priceRange' '0.00-20.00' %}">
+					<h2>Under £20</h2>
+				</a>
+			</td>
+			<td>
+				<a href="{% url 'priceRange' '20.00-50.00' %}">
+					<p><h2>£20 - £50</h2>
+				</a>
+			</td> 
+			<td>
+				<a href="{% url 'priceRange' '50.00-100.00' %}">
+					<p><h2>£50 - £100</h2>
+				</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<a href="{% url 'priceRange' '100.00-500.00' %}">
+					<p><h2>£100 - £500</h2>
+				</a>
+			</td>
+			<td>
+				<a href="{% url 'priceRange' '500.00-9999999999999999999.99' %}">
+					<p><h2>Over £500</h2>
+				</a>
+			</td> 
+		</tr>
+	</table>	
+{% endblock %}

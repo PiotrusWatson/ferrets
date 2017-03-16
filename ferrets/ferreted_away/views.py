@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from django.views.decorators.csrf import csrf_exempt
 from django.core.mail import send_mail
+from decimal import Decimal
 
 
 def home(request):
@@ -177,6 +178,16 @@ def showCategory(request, category_name_slug):
 
     return render(request, 'ferrets/showCategory.html', context_dict)
 
+def browsePrice(request):
+    return render(request, 'ferrets/browsePrice.html')
+
+def priceRange(request, priceRange):
+    range = priceRange
+    range.split("-")
+    context_dict["max_val"] = Decimal(range[0])
+    context_dict["min_val"] = Decimal(range[1])
+    context_dict["items"] = Item.objects.all()
+    return render(request, 'ferrets/priceRange.html', context_dict)
 
 ## To implement
 def showItem(request, item_itemId):

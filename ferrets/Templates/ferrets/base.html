@@ -21,8 +21,8 @@
 			<ul>
 				<li><a href="{% url 'home' %}">Home</a></li>
 				<li><a href="{% url 'categories' %}">Categories</a></li>
-				
 				{% get_category_list categories %}
+				<li><a href="{% url 'browsePrice' %}">Browse by Price</a></li>
 				
 			</ul>
 		</div>
