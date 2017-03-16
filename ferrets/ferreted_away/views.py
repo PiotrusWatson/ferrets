@@ -10,14 +10,14 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.mail import send_mail
 
 def home(request):
-    item_list = Item.objects.order_by('-views')[:5]
+    item_list = Item.objects.order_by('-views')[:3]
 
     context_dict = {'items': item_list,
                     }
 
     if request.user.is_authenticated():
         watched_list = Watchlist.objects.filter(user=request.user)
-        watched_list = watched_list.order_by("-date_added")[:5]
+        watched_list = watched_list.order_by("-date_added")[:3]
         context_dict = {'items': item_list,
                         'watched': watched_list,
                         }
