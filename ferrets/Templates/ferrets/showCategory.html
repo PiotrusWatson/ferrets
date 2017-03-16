@@ -8,11 +8,11 @@
     {% if category %}
         <h1>{{ category.name }}</h1>
         {% if items %}
-            <ul>
-                {% for item in items %}
-                    <li>{{ item.item_name }}</li>
-                {% endfor %}
-            </ul>
+		
+		<div id = "items">
+			{% for item in items %}
+				<img src = "{{ item.picture.url }}" alt = "{{ item.item_name }}" width="200px"\>
+			{% endfor %}
         {% else %}
             <strong>No items currently in category.</strong>
         {% endif %}
