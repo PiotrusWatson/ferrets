@@ -92,7 +92,7 @@ def addAccount(request):
         user_form = UserForm()
         profile_form = UserProfileForm()
 
-    return render(request, 'rango/register.html', {'user_form': user_form,
+    return render(request, 'ferrets/addaccount.html', {'user_form': user_form,
                                                    'profile_form': profile_form,
                                                    'registered': registered,
                                                    })
