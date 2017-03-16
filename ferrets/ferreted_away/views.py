@@ -29,7 +29,7 @@ def about(request):
     return render(request, 'ferrets/about.html')
 
 def faq(request):
-    return render(request, "ferrets/faqs.html")
+    return render(request, "ferrets/faq.html")
 
 def contact(request):
     return render(request, "ferrets/contact.html")
