@@ -20,14 +20,14 @@ body {
 	width: 165px;
 	height: 100% !important;
 	background: #9bd9e0;
-	margin-right: 10px;
-	padding: 2px;
+	margin-right: 20px;
 	float:left;
 }
 
 #sideBarCat {
-	padding-left: 10px;
+	padding-left: 19px;
 }
+
 
 #header {
 	width: 100%;
