@@ -19,9 +19,9 @@ urlpatterns = [
         views.showCategory,
         name='showCategory'),
 
-    #url(r'^category/(?P<category_name_slug>[\w\-]+)/(?P<item_name_slug>[\w\-]+)/$',
-    # views.showItem,
-    # name='showItem'),
+    url(r'^item/(?P<item_itemid>[\w\-]+)/$',
+     views.showItem,
+     name='showItem'),
 
 
 ]

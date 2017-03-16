@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.shortcuts import render
-from ferreted_away.models import Category, Item, UserProfile, Watchlist
+from ferreted_away.models import Category, Item, UserProfile, Watchlist, Comments
 from ferreted_away.forms import UserForm, UserProfileForm
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
@@ -157,14 +157,36 @@ def showCategory(request, category_name_slug):
     except Category.DoesNotExist:
 
         context_dict['category'] = None
-        context_dict['pages'] = None
+        context_dict['items'] = None
 
     return render(request, 'ferrets/category.html', context_dict)
 
 
 
 ## To implement
-def showItem(request):
+def showItem(request, item_itemId):
 
 
-    return render(request, "ferrets/showitem.html")
+    context_dict = {}
+
+    try:
+        item = Item.objects.get(itemId=item_itemId)
+
+        item.views = item.views + 1
+
+        if request.user.is_authenticated:
+            if request.user.username == item.user:
+                comments = Comments.objects.filter(item=item).order_by('date_added')
+            else:
+                comments = Comments.objects.filter(item=item, user__in=[item.user, request.user.username]).order_by('date_added')
+
+
+        context_dict['items'] = items
+
+        context_dict['category'] = category
+
+    except Item.DoesNotExist:
+
+        context_dict['category'] = None
+
+    return render(request, "ferrets/showitem.html", context_dict)
