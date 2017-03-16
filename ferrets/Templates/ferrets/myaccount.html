@@ -6,7 +6,38 @@
 {% endblock %}
 	
 {% block content %}
-	<h2>Hello, {{user.username}}</h2>
-	<h3><a href="{% url 'myItems' %}">My Items</a> | <a href="{% url 'myWatchlist' %}">My Watchlist</a></h3>
+	<h2>Hello, {{user.username}}!</h2>
+	<h3><a href="{% url 'myItems' %}">My Items</a></h3> 
+	{% if my_items %}
+	<table>
+		<tr>
+		{% for item in my_items %}
+			<td>
+			<a href="{% url 'showItem' %}">
+			<img src = "{{ item.picture.url }}" alt = "{{ item.item_name }}" width="200px"\>
+			</a>
+			</td>
+		{% endfor %}  
+		</tr>
+	</table>
+    {% else %}
+        <h5>You haven't uploaded any items for sale!</h5>
+    {% endif %}
+	<h3><a href="{% url 'myWatchlist' %}">My Watchlist</a></h3>
+	{% if my_items %}
+	<table>
+		<tr>
+		{% for item in my_watchlist %}
+			<td>
+			<a href="{% url 'showItem' %}">
+			<img src = "{{ item.picture.url }}" alt = "{{ item.item_name }}" width="200px"\>
+			</a>
+			</td>
+		{% endfor %} 
+		</tr>
+	</table>
+    {% else %}
+        <h5>You currently aren't watching any items!</h5>
+    {% endif %}
 	
 {% endblock %}
