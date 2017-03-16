@@ -34,7 +34,7 @@ body {
 	background: #34abba;
 	font-size: 50px;
 	color: #fff;
-	height: 150px;
+	height: 140px;
 	padding: 10px;
 }
 
@@ -57,13 +57,25 @@ body {
 h1 {
 	size: 20px;
 	color: 34abba;
+}
+
+h2 {
+	size: 14px;
+	color: 34abba;
 	text-transform: small caps;
 }
 
 a {
 	color: #fff;
+	margin-bottom:2px;
+	letter-spacing: 0.5px;
 }
 
 a:hover {
 	color: #226d77;
+}
+
+cat {
+	margin-left: 50px;
+	border: 1px solid #fff;
 }
