@@ -163,7 +163,7 @@ def showCategory(request, category_name_slug):
         context_dict['category'] = None
         context_dict['items'] = None
 
-    return render(request, 'ferrets/category.html', context_dict)
+    return render(request, 'ferrets/showCategory.html', context_dict)
 
 
 
