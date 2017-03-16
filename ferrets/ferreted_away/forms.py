@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from ferreted_away.models import Category, Item, UserProfile, Comments
-from datetime import datetime
+import datetime
 
 class ItemForm(forms.ModelForm):
 
@@ -10,9 +10,8 @@ class ItemForm(forms.ModelForm):
     price = forms.DecimalField(initial=0)
     description = forms.CharField(max_length=350,
                                   help_text="Please insert a Description")
-    views = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
-    likes = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
-    date_added = forms.DateField(widget=forms.HiddenInput(), initial=datetime.now())
+    views = forms.IntegerField(widget=forms.HiddenInput(), initial=0, required=False)
+    
 
 
 

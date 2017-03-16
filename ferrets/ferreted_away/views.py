@@ -114,8 +114,8 @@ def myAccount(request):
 @login_required
 def myItems(request):
     items = Item.objects.filter(user=request.user)
-
-    context_dict = {"items": items,
+	
+    context_dict = {"my_items": items,
                     }
     return render(request, "ferrets/myitems.html", context_dict)
 
@@ -126,11 +126,11 @@ def addItems(request, username):
     if request.method == 'POST':
         form = ItemForm(request.POST)
         if form.is_valid():
-            if category:
+            if username:
                 item = form.save(commit=False)
-                item.user = username
+                item.user = request.user
                 item.save()
-                return render(request, "ferrets/addItems.html", {'form': form})
+                return render(request, "ferrets/addItems.html")
     else:
         print(form.errors)
     context_dict = {'form': form}

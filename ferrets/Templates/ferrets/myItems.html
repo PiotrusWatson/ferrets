@@ -10,11 +10,12 @@
 	<h3>My Items</h3> 
 	<a class="itemlink" href="{% url 'addItems' user.username %}"><h4>Add new Item</h4></a>
 	{% if my_items %}
+
 		{% for item in my_items %}
 			<td>
-			<a href="{% url 'showItem' %}">
-			<img src = "{{ item.picture.url }}" alt = "{{ item.item_name }}" width="200px"\>
-			</a>
+				<a href="{% url 'showItem' item.itemId %}">
+					<img src = "{% if item.picture %}{{ item.picture.url }} {% else %} {% static 'images/placeholder.png' %} {% endif %}" alt = "{{ item.item_name }}" width="200px"\>
+				</a>
 			</td>
 		{% endfor %}  
     {% else %}
