@@ -9,6 +9,7 @@ from datetime import datetime
 from django.views.decorators.csrf import csrf_exempt
 from django.core.mail import send_mail
 
+
 def home(request):
     item_list = Item.objects.order_by('-views')[:5]
 
@@ -28,11 +29,14 @@ def home(request):
 def about(request):
     return render(request, 'ferrets/about.html')
 
+
 def faq(request):
     return render(request, "ferrets/faq.html")
 
+
 def contact(request):
     return render(request, "ferrets/contact.html")
+
 
 def sitemap(request):
     return render(request, "ferrets/sitemap.html")
@@ -41,7 +45,7 @@ def sitemap(request):
 def user_login(request):
     context_dict = {}
 
-    if request.method == 'POST' :
+    if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
 
@@ -49,7 +53,7 @@ def user_login(request):
 
         if user:
             if user.is_active:
-                login(request,user)
+                login(request, user)
                 return HttpResponseRedirect(reverse('home'))
             else:
                 return HttpResponse("Your Rango account is disabled")
@@ -57,13 +61,13 @@ def user_login(request):
         else:
             print("Invalid login details: {0}, {1}".format(username, password))
 
-            return render(request, 'ferrets/login.html',{'message' :"Invalid Username or Password"})
+            return render(request, 'ferrets/login.html', {'message': "Invalid Username or Password"})
 
     else:
         return render(request, "ferrets/login.html", context_dict)
 
-def addAccount(request):
 
+def addAccount(request):
     registered = False
 
     if request.method == 'POST':
@@ -93,9 +97,9 @@ def addAccount(request):
         profile_form = UserProfileForm()
 
     return render(request, 'ferrets/addaccount.html', {'user_form': user_form,
-                                                   'profile_form': profile_form,
-                                                   'registered': registered,
-                                                   })
+                                                       'profile_form': profile_form,
+                                                       'registered': registered,
+                                                       })
 
 
 @login_required
@@ -103,8 +107,9 @@ def myAccount(request):
     my_items = Item.objects.filter(user=request.user).order_by("-date_added")[:5]
     my_watchlist = Watchlist.objects.filter(user=request.user).order_by("-date_added")[:5]
 
-    context_dict = {"my_items":my_items, "my_watchlist":my_watchlist, "user":request.user}
+    context_dict = {"my_items": my_items, "my_watchlist": my_watchlist, "user": request.user}
     return render(request, "ferrets/myaccount.html", context_dict)
+
 
 @login_required
 def myItems(request):
@@ -114,14 +119,28 @@ def myItems(request):
                     }
     return render(request, "ferrets/myitems.html", context_dict)
 
-##To implement
 @login_required
 def addItems(request):
+    added = False
+    if request.method == 'POST':
+        item_form = ItemForm(data=request.POST)
 
+        if item_form.is_valid():
+            item = item_form.save()
 
+            if 'picture' in request.FILES:
+                item.picture = request.FILES['picture']
 
-    return render(request, "ferrets/additems.html")
+            item.save()
 
+            added = True
+        else:
+            print(item_form.errors)
+
+    else:
+        item_form = ItemForm()
+
+    return render(request, 'ferrets/addItems.html', {'item_form': item_form})
 
 
 @login_required
@@ -133,11 +152,11 @@ def myWatchlist(request):
     return render(request, "ferrets/mywatchlist.html", context_dict)
 
 
-
 @login_required
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('home'))
+
 
 def categories(request):
     context_dict = {'categories': Category.objects.all(),}
@@ -146,7 +165,6 @@ def categories(request):
 
 
 def showCategory(request, category_name_slug):
-
     context_dict = {}
 
     try:
@@ -166,14 +184,9 @@ def showCategory(request, category_name_slug):
     return render(request, 'ferrets/showCategory.html', context_dict)
 
 
-
 ## To implement
 def showItem(request, item_itemId):
-
-	
     context_dict = {}
-
-
 
     try:
         item = Item.objects.get(itemId=item_itemId)
@@ -203,7 +216,8 @@ def showItem(request, item_itemId):
                 if request.user.username == item.user:
                     comments = Comments.objects.filter(item=item).order_by('date_added')
                 else:
-                    comments = Comments.objects.filter(item=item, user__in=[item.user, request.user.username]).order_by('date_added')
+                    comments = Comments.objects.filter(item=item, user__in=[item.user, request.user.username]).order_by(
+                        'date_added')
 
             else:
 
@@ -226,12 +240,9 @@ def showItem(request, item_itemId):
 
         context_dict['comments'] = None
 
-
     return render(request, "ferrets/showitem.html", context_dict)
-    
-    
 
-    
+
 @csrf_exempt
 def send_message(request):
     if request.method == 'POST':

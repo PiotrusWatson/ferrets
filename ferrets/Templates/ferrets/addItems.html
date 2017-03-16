@@ -1,0 +1,20 @@
+{% extends 'ferrets/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+	- Add Item
+{% endblock %}
+
+{% block content %}
+	<h1>Add Item for Sale</h1>
+	<form id="add_item" method="post" action="{% url 'addItem' %}" enctype="multipart/form-data">
+		
+		{% csrf_token %}
+		
+		<!-- Display each form -->
+		{{ item_form.as_p }}
+		
+		<input type="submit" name="submit" value="Add Item" />
+	</form>
+
+{% endblock %}

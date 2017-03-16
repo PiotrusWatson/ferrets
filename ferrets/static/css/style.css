@@ -54,6 +54,13 @@ body {
 	padding:10px;
 }
 
+a.itemlink {
+	color: #121411;
+}
+a.itemlink:hover{
+	color: #abdefc;
+}
+
 h1 {
 	size: 20px;
 	color: 34abba;
@@ -101,13 +108,6 @@ a {
 a:hover {
 	color: #226d77;
 }
-
-/* #accomlink {
-	color: #333;
-}
-#accomlink:hover{
-	color: #fefefe;
-} */
 
 cat {
 	margin-left: 50px;

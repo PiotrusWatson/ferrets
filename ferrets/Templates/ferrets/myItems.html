@@ -1,0 +1,23 @@
+{% extends 'ferrets/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+		- My Items
+{% endblock %}
+	
+{% block content %}
+	<h2>Hello, {{user.username}}!</h2>
+	<h3>My Items</h3> 
+	<a class="itemlink" href="{% url 'addItems' %}>"<h4>Add new Item</h4></a>
+	{% if my_items %}
+		{% for item in my_items %}
+			<td>
+			<a href="{% url 'showItem' %}">
+			<img src = "{{ item.picture.url }}" alt = "{{ item.item_name }}" width="200px"\>
+			</a>
+			</td>
+		{% endfor %}  
+    {% else %}
+        <h5>You haven't uploaded any items for sale!</h5>
+    {% endif %}
+{% endblock %}
