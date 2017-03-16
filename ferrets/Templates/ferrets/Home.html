@@ -1,76 +1,15 @@
-<!DOCTYPE HTML>
+{% extends 'ferrets/base.html' %}
+{% load staticfiles %}
 
-<html>
-<head>
-	<title>Ferreted Away</title>
-	<style type="text/css" media="screen">
-
-		body {
-			background-color:#fff;
-			positon:relative;
-			font-family: Calibri;
-		}
-
-		#pagewrapper {
-			position:absolute;
-			width:100%;
-			height: 80%;
-		}
-
-		
-		#content {
-		   width: 100%;
-		   size:11px !important;
-		   color:#111 !important;
-		} 
-		
-		#sidebar {
-			width: 165px;
-			height: 100%;
-			background: #9bd9e0;
-			margin-right: 10px;
-			padding: 2px;
-			float:left;
-			}
-			
-		#header {
-			width: 100%;
-			background: #34abba;
-			font-size: 50px;
-			font-align:bottom left;
-			color: #fff;
-			height: 150px;
-			padding: 10px;
-			}
-			
-		#logo{
-			position: relative;
-			float: left;
-		}
-		
-
-		#infobar {
-			position: relative;
-			clear: both;
-			text-align: center;
-			bottom: 5px;
-			background: #34abba;
-			color: #fff;
-			width:99%;
-			padding:10px;
-		}
-		
-
-	 </style>
-</head>
-<body>
-	<div id="header"><div id="logo"><img src="FerretedAwayLogo.png" alt="logo" height="150px"/></div> <div class="headerText">erreted Away</div></div>
-	<div id="pagewrapper">
-		<div id="sidebar">This is the sidebar</div>
-		<div id="content">This is the page content</div>
-		<div id="infobar">About | Contact | Site Map | FAQ</div>
-		</div>
-	</div>
+{% block title_block %}
+		- Home
+{% endblock %}
+	
+{% block content %}
+<div id="content">
+<h1>Welcome to Ferreted Away!</h1>
+<p>Ferreted Away is a site made for student, by students. It's like StudentVoice meets GumTree, but better.
+On Ferreted Away you can buy and sell anything, and it's completely free to join.
+This is the page content
 </div>
-</body>
-</html>
+{% endblock %}

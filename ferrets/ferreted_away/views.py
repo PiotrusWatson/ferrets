@@ -20,14 +20,14 @@ def home(request):
                         'watched': watched_list,
                         }
 
-    return render(request, 'ferrets/index.html', context=context_dict)
+    return render(request, 'ferrets/home.html', context=context_dict)
 
 
 def about(request):
     return render(request, 'ferrets/about.html')
 
 def faq(request):
-    return render(request, "ferrets/faq.html")
+    return render(request, "ferrets/faqs.html")
 
 def contact(request):
     return render(request, "ferrets/contact.html")
