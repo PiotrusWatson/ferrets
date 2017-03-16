@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from ferreted_away.models import Category, Item, UserProfile
+from ferreted_away.models import Category, Item, UserProfile, Comments
 from datetime import datetime
 
 class ItemForm(forms.ModelForm):
@@ -43,6 +43,6 @@ class UserProfileForm(forms.ModelForm):
 class CommentForm(forms.ModelForm):
 
     class Meta:
-        model = Item
+        model = Comments
         exclude = ('user','data_added','item',)
         fields = ('comment',)
