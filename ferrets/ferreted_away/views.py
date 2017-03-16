@@ -6,6 +6,8 @@ from ferreted_away.models import Category, Item, UserProfile, Watchlist
 from ferreted_away.forms import UserForm, UserProfileForm
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
+from django.views.decorators.csrf import csrf_exempt
+from django.core.mail import send_mail
 
 def home(request):
     item_list = Item.objects.order_by('-views')[:5]
@@ -168,3 +170,24 @@ def showItem(request):
 
 
     return render(request, "ferrets/showitem.html")
+    
+    
+
+    
+@csrf_exempt
+def send_message(request):
+    if request.method == 'POST':
+        print(request.POST)
+        message = request.POST.get("message", None)
+        email = request.POST.get("email", None)
+        name = request.POST.get("name", None)
+        send_mail(
+            'FerretedAway Contact Form',
+            'Message: ' + message + "\n\nReply e-mail: " + email,
+            'ferretedawayteam@gmail.com',
+            ['ferretedawayteam@gmail.com'],
+            fail_silently=True,
+        )
+        return HttpResponse("success")
+    else:
+        return HttpResponse("failure")

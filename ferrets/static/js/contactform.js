@@ -1,39 +1,31 @@
-$(function() {
-    var form = $('#contact-us');
-    var formMessages = $('#form-messages');
-});
+$("#sendButton").click(function() {
+    $.post(
+            $('#contact-us').attr('action'),
+			{ message: $('#message').val(),
+			email: $('#email').val(),
+			name: $('#name').val() }
+		)
 
+        .done(function(response) {
+			alert("Done");
+            // $(formMessages).removeClass('error');
+            // $(formMessages).addClass('success');
 
-$(form).submit(function(event) {
-    event.preventDefault();
-});
+            // $(formMessages).text(response);
 
-var formData = $(form).serialize();
+            // $('#name').val('');
+            // $('#email').val('');
+            // $('#message').val('');
+        })
 
-$.ajax({
-    type: 'POST',
-    url: $(form).attr('action'),
-    data: formData
-})
+        .fail(function(data) {
+            // $(formMessages).removeClass('success');
+            // $(formMessages).addClass('error');
 
-.done(function(response) {
-    $(formMessages).removeClass('error');
-    $(formMessages).addClass('success');
-
-    $(formMessages).text(response);
-
-    $('#name').val('');
-    $('#email').val('');
-    $('#message').val('');
-})
-
-.fail(function(data) {
-    $(formMessages).removeClass('success');
-    $(formMessages).addClass('error');
-
-    if (data.responseText !== '') {
-        $(formMessages).text(data.responseText);
-    } else {
-        $(formMessages).text('Sorry! Soemthing went wrong. Message not sent.');
-    }
+            // if (data.responseText !== '') {
+                // $(formMessages).text(data.responseText);
+            // } else {
+                // $(formMessages).text('Sorry! Soemthing went wrong. Message not sent.');
+            // }
+        });
 });
