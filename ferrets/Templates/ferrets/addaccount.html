@@ -2,17 +2,17 @@
 {% load staticfiles %}
 
 {% block title_block %}
-	- Log In
+	- Register
 {% endblock %}
 
 {% block content %}
 	<h1>Log In</h1>
 	{% if registered %}
 		Thanks for registering!
-		<a href="{% url 'index' %}">Return to the homepage.</a><br />
+		<a href="{% url 'home' %}">Return to the homepage.</a><br />
 	{% else %}
 		Register here!
-		<form id="user_form" method="post" action="{% url 'register' %}" enctype="multipart/form-data">
+		<form id="user_form" method="post" action="{% url 'addAccount' %}" enctype="multipart/form-data">
 		
 		{% csrf_token %}
 		
