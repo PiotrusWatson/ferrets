@@ -2,8 +2,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.shortcuts import render
-from ferreted_away.models import Category, Item, UserProfile, Watchlist
-from ferreted_away.forms import UserForm, UserProfileForm
+from ferreted_away.models import Category, Item, UserProfile, Watchlist, Comments
+from ferreted_away.forms import UserForm, UserProfileForm, CommentForm
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from django.views.decorators.csrf import csrf_exempt
@@ -63,6 +63,7 @@ def login(request):
         return render(request, "ferrets/login.html", context_dict)
 
 def addAccount(request):
+
     registered = False
 
     if request.method == 'POST':
@@ -85,6 +86,7 @@ def addAccount(request):
             registered = True
         else:
             print(user_form.errors, profile_form.errors)
+
     else:
 
         user_form = UserForm()
@@ -159,17 +161,73 @@ def showCategory(request, category_name_slug):
     except Category.DoesNotExist:
 
         context_dict['category'] = None
-        context_dict['pages'] = None
+        context_dict['items'] = None
 
     return render(request, 'ferrets/category.html', context_dict)
 
 
 
 ## To implement
-def showItem(request):
+def showItem(request, item_itemId):
+
+	
+    context_dict = {}
 
 
-    return render(request, "ferrets/showitem.html")
+
+    try:
+        item = Item.objects.get(itemId=item_itemId)
+
+        if request.method == 'POST':
+            commentForm = CommentForm(data=request.POST)
+
+            if commentForm.is_valid():
+                comment = commentForm.save()
+
+                comment.user = request.user
+                comment.item = item
+                comment.save()
+
+            else:
+                print(commentForm.errors)
+        else:
+
+            commentForm = CommentForm()
+
+            item.views = item.views + 1
+
+            if request.user.is_authenticated:
+
+                logged_in = True
+
+                if request.user.username == item.user:
+                    comments = Comments.objects.filter(item=item).order_by('date_added')
+                else:
+                    comments = Comments.objects.filter(item=item, user__in=[item.user, request.user.username]).order_by('date_added')
+
+            else:
+
+                logged_in = False
+
+                comments = Comments.objects.filter(item=item, user=item.user).order_by('date_added')
+
+            context_dict['item'] = item
+
+            context_dict['comments'] = comments
+
+            context_dict['logged'] = logged_in
+
+            context_dict['commentForm'] = commentForm
+
+
+    except Item.DoesNotExist:
+
+        context_dict['item'] = None
+
+        context_dict['comments'] = None
+
+
+    return render(request, "ferrets/showitem.html", context_dict)
     
     
 
