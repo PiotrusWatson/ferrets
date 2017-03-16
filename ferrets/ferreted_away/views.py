@@ -101,7 +101,7 @@ def addAccount(request):
 @login_required
 def myAccount(request):
     my_items = Item.objects.filter(user=request.user).order_by("-date_added")[:5]
-    my_watchlist = Watchlist.filter(user=request.user).order_by("-date_added")[:5]
+    my_watchlist = Watchlist.objects.filter(user=request.user).order_by("-date_added")[:5]
 
     context_dict = {"my_items":my_items, "my_watchlist":my_watchlist, "user":request.user}
     return render(request, "ferrets/myaccount.html", context_dict)
