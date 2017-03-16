@@ -1,0 +1,29 @@
+{% extends 'ferrets/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+	- Categories
+{% endblock %}
+
+{% block content %}
+	<h1>Categories</h1>
+	<p><a href="{% url 'categories' %}">
+		<h2>Accomodation</h2>
+		<div class="cat"><img src="{% static 'images/accomodation.jpeg' %}" alt="accomodation" height="200px"/>
+	</a>
+	
+	<p><h2>Food</h2>
+	<div class="cat"><img src="{% static 'images/food.jpeg' %}" alt="accomodation" height="200px"/>
+	
+	<p><h2>Books</h2>
+	<div class="cat"><img src="{% static 'images/books.jpeg' %}" alt="accomodation" height="200px"/>
+	
+	<p><h2>Other</h2>
+	<div class="cat"><img src="{% static 'images/other.jpeg' %}" alt="accomodation" height="200px"/>
+	
+	<p><h2>Transport</h2>
+	<div class="cat"><img src="{% static 'images/transport.jpeg' %}" alt="accomodation" height="200px"/>
+	
+	<p><h2>Clothes</h2>
+	<div class="cat"><img src="{% static 'images/clothes.jpeg' %}" alt="accomodation" height="200px"/>
+{% endblock %}

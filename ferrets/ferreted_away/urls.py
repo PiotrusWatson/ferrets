@@ -14,7 +14,7 @@ urlpatterns = [
     url(r'myaccount/additems/$', views.addItems, name='addItems'),
     url(r'myaccount/mywatchlist/$', views.myWatchlist, name='myWatchlist'),
     url(r'categories/$', views.categories, name='categories'),
-
+	url(r'send_mail/$', views.send_message, name='sendMessage'),
     url(r'^category/(?P<category_name_slug>[\w\-]+)/$',
         views.showCategory,
         name='showCategory'),
