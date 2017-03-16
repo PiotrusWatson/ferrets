@@ -15,7 +15,7 @@ This is the page content
 <div id = "items">
 <h2> CURRENT TRENDING ITEMS </h2>
 {% for item in items %}
-	<img src = "{{ item.picture.url }}" alt = "{{ item.item_name }}" \>
+	<img src = "{{ item.picture.url }}" alt = "{{ item.item_name }}" width="200px"\>
 {% endfor %}
 </div>
 {% if user.is_authenticated %}
