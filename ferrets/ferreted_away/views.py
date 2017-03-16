@@ -38,7 +38,7 @@ def sitemap(request):
     return render(request, "ferrets/sitemap.html")
 
 
-def login(request):
+def user_login(request):
     context_dict = {}
 
     if request.method == 'POST' :
@@ -137,7 +137,7 @@ def myWatchlist(request):
 @login_required
 def user_logout(request):
     logout(request)
-    return HttpResponseRedirect(reverse('Home'))
+    return HttpResponseRedirect(reverse('home'))
 
 def categories(request):
     context_dict = {'categories': Category.objects.all(),}
