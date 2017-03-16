@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 from django.db import models
+import random
 
 class Category(models.Model):
     name = models.CharField(max_length=128, unique=True)
@@ -20,12 +21,20 @@ class Category(models.Model):
 class Item(models.Model):
     category = models.ForeignKey(Category)
     user = models.ForeignKey(User)
+    itemId = models.IntegerField(unique=True)
     item_name = models.CharField(max_length=128, blank=True)
     price = models.DecimalField(max_digits=21, decimal_places=2)
     description = models.TextField(max_length=350, blank=True)
     picture = models.ImageField(upload_to='item_images', blank=True)
     views = models.IntegerField(default=0)
     date_added = models.DateTimeField(auto_now=False, auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+        try:
+            self.itemId = random.randint(0,1000000)
+        except:
+            save(self, *args, **kwargs)
+        super(Item, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.item_name
