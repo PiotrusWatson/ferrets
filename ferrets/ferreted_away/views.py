@@ -10,12 +10,12 @@ from datetime import datetime
 def home(request):
     item_list = Item.objects.order_by('-views')[:5]
 
-
     context_dict = {'items': item_list,
                     }
 
     if request.user.is_authenticated():
-        watched_list = Watchlist.filter(user=request.user).order_by("-date_added")[:5]
+        watched_list = Watchlist.objects.filter(user=request.user)
+        watched_list = watched_list.order_by("-date_added")[:5]
         context_dict = {'items': item_list,
                         'watched': watched_list,
                         }
@@ -24,8 +24,7 @@ def home(request):
 
 
 def about(request):
-    context_dict = {'stuff':'place holder stuff'}
-    return render(request, 'ferrets/about.html', context_dict)
+    return render(request, 'ferrets/about.html')
 
 def faq(request):
     return render(request, "ferrets/faq.html")
@@ -38,6 +37,7 @@ def sitemap(request):
 
 
 def login(request):
+    context_dict = {}
 
     if request.method == 'POST' :
         username = request.POST.get('username')
@@ -58,7 +58,7 @@ def login(request):
             return render(request, 'ferrets/login.html',{'message' :"Invalid Username or Password"})
 
     else:
-        return render(request, "ferrets/login.html", {})
+        return render(request, "ferrets/login.html", context_dict)
 
 def addAccount(request):
     registered = False
@@ -90,7 +90,8 @@ def addAccount(request):
 
     return render(request, 'rango/register.html', {'user_form': user_form,
                                                    'profile_form': profile_form,
-                                                   'registered': registered})
+                                                   'registered': registered,
+                                                   })
 
 
 @login_required
@@ -105,7 +106,8 @@ def myAccount(request):
 def myItems(request):
     items = Item.objects.filter(user=request.user)
 
-    context_dict = {"items": items}
+    context_dict = {"items": items,
+                    }
     return render(request, "ferrets/myitems.html", context_dict)
 
 ##To implement
@@ -122,7 +124,8 @@ def addItems(request):
 def myWatchlist(request):
     watchlist = Watchlist.filter(user=request.user).order_by("-date_added")[:5]
 
-    context_dict = {"watchlist": watchlist}
+    context_dict = {"watchlist": watchlist,
+                    }
     return render(request, "ferrets/mywatchlist.html", context_dict)
 
 
@@ -133,9 +136,7 @@ def user_logout(request):
     return HttpResponseRedirect(reverse('Home'))
 
 def categories(request):
-    categories = Category.objects
-
-    context_dict ={"categories": categories}
+    context_dict = {'categories': Category.objects.all(),}
 
     return render(request, "ferrets/categories.html", context_dict)
 
@@ -164,8 +165,6 @@ def showCategory(request, category_name_slug):
 
 ## To implement
 def showItem(request):
-
-
 
 
     return render(request, "ferrets/showitem.html")

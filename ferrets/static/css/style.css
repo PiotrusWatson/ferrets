@@ -25,6 +25,10 @@ body {
 	float:left;
 }
 
+#sideBarCat {
+	padding-left: 19px;
+}
+
 #header {
 	width: 100%;
 	background: #34abba;
