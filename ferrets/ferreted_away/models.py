@@ -25,7 +25,7 @@ class Item(models.Model):
     item_name = models.CharField(max_length=128, blank=True)
     price = models.DecimalField(max_digits=21, decimal_places=2)
     description = models.TextField(max_length=350, blank=True)
-    picture = models.ImageField(upload_to='item_images', blank=True)
+    picture = models.ImageField(upload_to="uploads/", blank=True)
     views = models.IntegerField(default=0)
     date_added = models.DateTimeField(auto_now=False, auto_now_add=True)
 
