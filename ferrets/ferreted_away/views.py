@@ -61,6 +61,7 @@ def login(request):
         return render(request, "ferrets/login.html", context_dict)
 
 def addAccount(request):
+
     registered = False
 
     if request.method == 'POST':
@@ -83,6 +84,7 @@ def addAccount(request):
             registered = True
         else:
             print(user_form.errors, profile_form.errors)
+
     else:
 
         user_form = UserForm()

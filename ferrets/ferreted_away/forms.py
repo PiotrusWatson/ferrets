@@ -8,14 +8,13 @@ class ItemForm(forms.ModelForm):
     item_name = forms.CharField(max_length=128,
                            help_text="Please insert the item name.")
     price = forms.DecimalField(initial=0)
-##    description = forms.TextField(max_length=350,
-                                  ##help_text="Please insert a Description")
+    description = forms.CharField(max_length=350,
+                                  help_text="Please insert a Description")
     views = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
     likes = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
     date_added = forms.DateField(widget=forms.HiddenInput(), initial=datetime.now())
 
-##    category = models.ForeignKey(Category)
-##    picture = models.ImageField(upload_to='item_images', blank=True)
+
 
     class Meta:
         model = Item
