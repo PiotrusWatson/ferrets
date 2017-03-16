@@ -38,3 +38,11 @@ class UserProfileForm(forms.ModelForm):
         model = UserProfile
         fields = ('picture',)
 
+
+
+class CommentForm(forms.ModelForm):
+
+    class Meta:
+        model = Item
+        exclude = ('user','data_added','item',)
+        fields = ('comment',)
