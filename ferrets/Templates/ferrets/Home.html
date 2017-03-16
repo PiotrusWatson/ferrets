@@ -15,13 +15,13 @@ This is the page content
 <div id = "items">
 <h2> CURRENT TRENDING ITEMS </h2>
 {% for item in items %}
-	<img src = "{{ item.picture }}" alt = "{{ item.item_name }}" \>
+	<img src = "{{ item.picture.url }}" alt = "{{ item.item_name }}" \>
 {% endfor %}
 </div>
 {% if user.is_authenticated %}
 	<div id = "watchlist">
 	{% for item in watchlist %}
-	<li id = "image"> <img src = "{{ item.picture }}" alt = "{{ item.item_name }}" \>
+	<li id = "image"> <img src = "{{ item.picture.url }}" alt = "{{ item.item_name }}" \>
 	{% endfor %}
 	</div>
 {% endif %}

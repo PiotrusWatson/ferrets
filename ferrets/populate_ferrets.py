@@ -18,11 +18,11 @@ def populate():
         {"item_name": "Rollerskates",
          "price": "20.00",
          "description": "Neon pink rollerskates, size 6.",
-         "image": "uploads/skat.jpg"},
+         "image": "skat.jpg"},
         {"item_name": "Private Jet",
          "price": "24000.00",
          "description": "Small turboprop jet. Airport not included.",
-         "image": "uploads/jet.jpg"},
+         "image": "jet.jpg"},
         {"item_name": "VW Golf",
          "price": "5.00",
          "description": "Not a real VW Golf, just a toy one.",
@@ -124,7 +124,7 @@ def populate():
     for cat, cat_data in cats.items():
         c = add_cat(cat)
         for i in cat_data["items"]:
-            add_item(c, up, i["item_name"], i["price"], i["description"], image=i["image"])
+            add_item(c, up, i["item_name"], i["price"], i["description"], image="uploads/%s" % i["image"])
 
     for c in Category.objects.all():
         for i in Item.objects.filter(category=c):
@@ -139,11 +139,11 @@ def add_user(sample_user):
     up.save()
     return u
 
-def add_item(cat, user, name, price, description, views=0, image = None):
+def add_item(cat, user, name, price, description, views=0, image = ""):
     i = Item.objects.get_or_create(category=cat, item_name=name, price=price, user = user)[0]
     i.description=description
     i.views=views
-    i.picture = image
+    i.picture.name = image
     i.save()
     return i
 
