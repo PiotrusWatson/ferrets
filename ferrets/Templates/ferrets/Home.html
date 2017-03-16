@@ -25,9 +25,14 @@ This is the page content
 {% if user.is_authenticated %}
 	<h2> YOUR WATCHLIST </h2>
 	<div id = "watchlist">
-	{% for item in watchlist %}
-	<li id = "image"> <img src = "{{ item.picture.url }}" alt = "{{ item.item_name }}" \>
-	{% endfor %}
+	{% if watchlist %}
+		{% for item in watchlist %}
+		<img class = "cropandreduce" src = "{{ item.picture.url }}" alt = "{{ item.item_name }}" width = 200px height = 200px\>
+		{% endfor %}
 	</div>
+	{% else %}
+	<p>You don't have any items in your watchlist :(<\p>
+	{% endif %}
+	
 {% endif %}
 {% endblock %}
