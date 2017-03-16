@@ -15,13 +15,8 @@ urlpatterns = [
     url(r'myaccount/mywatchlist/$', views.myWatchlist, name='myWatchlist'),
     url(r'categories/$', views.categories, name='categories'),
 	url(r'send_mail/$', views.send_message, name='sendMessage'),
-    url(r'^category/(?P<category_name_slug>[\w\-]+)/$',
-        views.showCategory,
-        name='showCategory'),
-
-    url(r'^item/(?P<item_itemid>[\w\-]+)/$',
-     views.showItem,
-     name='showItem'),
+    url(r'^category/(?P<category_name_slug>[\w\-]+)/$', views.showCategory, name='showCategory'),
+	url(r'^item/(?P<item_itemid>[\w\-]+)/$', views.showItem, name='showItem'),
 
 
 ]

@@ -1,0 +1,22 @@
+{% extends 'ferrets/base.html' %}
+{% load staticfiles %}
+{% block title_block %}
+    - {{ category.name }}
+{% endblock %}
+
+{% block content %}
+    {% if category %}
+        <h1>{{ category.name }}</h1>
+        {% if pages %}
+            <ul>
+                {% for item in items %}
+                    <li>{{ item.item_name }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <strong>No items currently in category.</strong>
+        {% endif %}
+    {% else %}
+        The specified category does not exist!
+    {% endif %}
+{% endblock %}
