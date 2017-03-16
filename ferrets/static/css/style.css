@@ -63,11 +63,18 @@ h2 {
 	size: 14px;
 	color: 34abba;
 	text-transform: small caps;
-	a {
-		color: #000;
-	}
+
 }
 
+a h2 {
+	color: #226d77;
+	text-decoration: underline !important;
+	}
+
+a h2:hover {
+	color: #9bd9e0;
+}
+	
 a {
 	color: #fff;
 	margin-bottom:2px;
