@@ -7,7 +7,7 @@
 
 {% block content %}
 	<h1>Add Item for Sale</h1>
-	<form id="add_item" method="post" action="addItem" enctype="multipart/form-data">
+	<form id="add_item" method="post" action="/myaccount/{{ user.username }}/addItems">
 		
 		{% csrf_token %}
 		

@@ -122,12 +122,6 @@ def myItems(request):
 
 @login_required
 def addItems(request, username):
-
-    # try:
-        # user = User.objects.get(user=username)
-    # except User.DoesNotExist:
-        # user = None
-
     form = ItemForm()
     if request.method == 'POST':
         form = ItemForm(request.POST)
@@ -136,7 +130,7 @@ def addItems(request, username):
                 item = form.save(commit=False)
                 item.user = username
                 item.save()
-                return render(request, "ferrets/addItems.html")
+                return render(request, "ferrets/addItems.html", {'form': form})
     else:
         print(form.errors)
     context_dict = {'form': form}
