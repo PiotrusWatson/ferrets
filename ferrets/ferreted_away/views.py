@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.shortcuts import render
 from ferreted_away.models import Category, Item, UserProfile, Watchlist, Comments
-from ferreted_away.forms import UserForm, UserProfileForm, CommentForm
+from ferreted_away.forms import UserForm, UserProfileForm, CommentForm, ItemForm
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from django.views.decorators.csrf import csrf_exempt
@@ -119,28 +119,28 @@ def myItems(request):
                     }
     return render(request, "ferrets/myitems.html", context_dict)
 
+
 @login_required
-def addItems(request):
-    added = False
+def addItems(request, username):
+
+    # try:
+        # user = User.objects.get(user=username)
+    # except User.DoesNotExist:
+        # user = None
+
+    form = ItemForm()
     if request.method == 'POST':
-        item_form = ItemForm(data=request.POST)
-
-        if item_form.is_valid():
-            item = item_form.save()
-
-            if 'picture' in request.FILES:
-                item.picture = request.FILES['picture']
-
-            item.save()
-
-            added = True
-        else:
-            print(item_form.errors)
-
+        form = ItemForm(request.POST)
+        if form.is_valid():
+            if category:
+                item = form.save(commit=False)
+                item.user = username
+                item.save()
+                return render(request, "ferrets/addItems.html")
     else:
-        item_form = ItemForm()
-
-    return render(request, 'ferrets/addItems.html', {'item_form': item_form})
+        print(form.errors)
+    context_dict = {'form': form}
+    return render(request, 'ferrets/addItems.html', context_dict)
 
 
 @login_required
