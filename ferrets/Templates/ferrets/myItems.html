@@ -21,6 +21,8 @@
 
 
 				<a class="itemlink" href="{% url 'showItem' item.itemId %}">{{item.item_name}}</a>
+				</br>
+				<a class="itemlink" href="{% url 'deleteItem' item.itemId %}">Remove Item</a>
 			</td>
 		{% endfor %} 
 		</tr>
