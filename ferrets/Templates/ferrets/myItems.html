@@ -12,11 +12,11 @@
 	{% if my_items %}
 
 		{% for item in my_items %}
-			<td>
 				<a href="{% url 'showItem' item.itemId %}">
 					<img src = "{% if item.picture %}{{ item.picture.url }} {% else %} {% static 'images/placeholder.png' %} {% endif %}" alt = "{{ item.item_name }}" width="200px"\>
 				</a>
-			</td>
+				</br>
+				<a class="itemlink" href="{% url 'deleteItem' item.itemId %}">Remove Item</a>
 		{% endfor %}  
     {% else %}
         <h5>You haven't uploaded any items for sale!</h5>
