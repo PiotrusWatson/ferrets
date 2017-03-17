@@ -106,7 +106,7 @@ def addAccount(request):
 @login_required
 def myAccount(request):
     my_items = Item.objects.filter(user=request.user).order_by("-date_added")[:5]
-    my_watchlist = Watchlist.objects.filter(user=request.user).order_by("-date_added")[:5]
+    my_watchlist = Item.objects.filter(item_name__in = Watchlist.objects.filter(user=request.user)).order_by("-date_added")[:5]
 
     context_dict = {"my_items": my_items, "my_watchlist": my_watchlist, "user": request.user}
     return render(request, "ferrets/myaccount.html", context_dict)
@@ -130,7 +130,13 @@ def addItems(request, username):
             if username:
                 item = form.save(commit=False)
                 item.user = request.user
+
+
+                if 'picture' in request.FILES:
+                    item.picture = request.FILES['picture']
+
                 item.save()
+
                 return render(request, "ferrets/addItems.html")
     else:
         print(form.errors)
@@ -140,7 +146,8 @@ def addItems(request, username):
 
 @login_required
 def myWatchlist(request):
-    watchlist = Watchlist.filter(user=request.user).order_by("-date_added")[:5]
+    watchlist = Item.objects.filter(item_name__in=Watchlist.objects.filter(user=request.user)).order_by(
+        "-date_added")[:5]
 
     context_dict = {"watchlist": watchlist,
                     }
