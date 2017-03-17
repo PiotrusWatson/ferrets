@@ -11,7 +11,7 @@
             {% for item in items %}
                 {% if item.price <= 20.00 %}
 					<a href="{% url 'showItem' item.itemId %}">
-                    <img src = "{% if item.picture %}{{ item.picture.url }} {% else %}{% static 'images/placeholder.png' %} {% endif %}" alt = "{{ item.item_name }}" width="200px" height="200px" class="itempic"\>
+                    <img src = "{% if item.picture %}{{ item.picture.url }} {% else %}{% static 'images/placeholder.png' %} {% endif %}" alt = "{{ item.item_name }}" width="200px" height="200px"\>
 					</a>
 				{% endif %}
             {% endfor %}

@@ -153,8 +153,10 @@ cat {
 	border: 1px solid #fff;
 }
 
-itempic {
+a img {
 	margin-right: 15px;
+	margin-bottom: 15px;
+	border: 2px solid #999;
 }
 
 .cropandreduce{
