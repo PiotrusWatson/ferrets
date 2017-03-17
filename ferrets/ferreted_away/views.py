@@ -29,6 +29,8 @@ def home(request):
 def searchresults(request):
     return render(request, 'ferrets/searchresults.html')
 
+def verify(request):
+    return render(request, 'ferrets/google695f0a9a1e7dc6ba.html')
 
 def about(request):
     return render(request, 'ferrets/about.html')

@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^myaccount/(?P<item_itemid>[\w\-]+)/addWatchlist/$', views.addWatchlist, name='addWatchlist'),
     url(r'^myaccount/(?P<item_itemid>[\w\-]+)/removeWatchlist/$', views.removeWatchlist, name='removeWatchlist'),
     url(r'^searchresults/$', views.searchresults, name='searchresults'),
+    url(r'^google695f0a9a1e7dc6ba.html/$', views.verify, name='verify'),
 ]
