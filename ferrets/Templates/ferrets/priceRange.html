@@ -6,45 +6,45 @@
 
 {% block content %}
     {% if items %}
-		{% if range == '0'}
+        {% if range == '0' %}
             <h1>Under £20</h1>
             {% for item in items %}
                 {% if item.price <= 20.00 %}
-                    <img src = "{{ item.picture.url }}" alt = "{{ item.item_name }}" width="200px"\>
+                    <img src = "{% if item.picture %}{{ item.picture.url }} {% else %}{% static 'images/placeholder.png' %} {% endif %}" alt = "{{ item.item_name }}" width="200px"\>
                 {% endif %}
             {% endfor %}
-        {% elseif range == '20'}
+        {% elif range == '20' %}
             <h1>£20 - £50</h1>
             {% for item in items %}
                 {% if item.price >= 20.00 and item.price <= 50.00 %}
-                    <img src = "{{ item.picture.url }}" alt = "{{ item.item_name }}" width="200px"\>
+                    <img src = "{% if item.picture %}{{ item.picture.url }} {% else %} {% static 'images/placeholder.png' %} {% endif %}" alt = "{{ item.item_name }}" width="200px"\>
                 {% endif %}
             {% endfor %}
-        {% elseif range == 50}
+        {% elif range == '50' %}
             <h1>£50 - £100</h1>
             {% for item in items %}
                 {% if item.price >= 50.00 and item.price <= 100.00 %}
-                    <img src = "{{ item.picture.url }}" alt = "{{ item.item_name }}" width="200px"\>
+                    <img src = "{% if item.picture %}{{ item.picture.url }} {% else %} {% static 'images/placeholder.png' %} {% endif %}" alt = "{{ item.item_name }}" width="200px"\>
                 {% endif %}
             {% endfor %}
-        {% elseif range == 100}
+        {% elif range == '100' %}
             <h1>£100 - £500</h1>
             {% for item in items %}
                 {% if item.price >= 100.00 and item.price <= 500.00 %}
-                    <img src = "{{ item.picture.url }}" alt = "{{ item.item_name }}" width="200px"\>
+                    <img src = "{% if item.picture %}{{ item.picture.url }} {% else %} {% static 'images/placeholder.png' %} {% endif %}" alt = "{{ item.item_name }}" width="200px"\>
                 {% endif %}
             {% endfor %}
-        {% elseif range == 500}
+        {% elif range == '500' %}
             <h1>Over £500</h1>
             {% for item in items %}
                 {% if item.price >= 500.00 %}
-                    <img src = "{{ item.picture.url }}" alt = "{{ item.item_name }}" width="200px"\>
+                    <img src = "{% if item.picture %}{{ item.picture.url }} {% else %} {% static 'images/placeholder.png' %} {% endif %}" alt = "{{ item.item_name }}" width="200px"\>
                 {% endif %}
             {% endfor %}
         {% else %}
-            <h1>Not a valid price range!</h1>
+            Not a valid price range.
         {% endif %}
     {% else %}
-        There are no items to show!
+        There are no items to show.
     {% endif %}
 {% endblock %}
