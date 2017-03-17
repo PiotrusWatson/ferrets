@@ -13,6 +13,9 @@
 					<a href="{% url 'showItem' item.itemId %}">
                     <img src = "{% if item.picture %}{{ item.picture.url }} {% else %}{% static 'images/placeholder.png' %} {% endif %}" alt = "{{ item.item_name }}" width="200px" height="200px"\>
 					</a>
+                    {{ item.item_name }}
+                    </br>
+                    £{{ item.price }}
 				{% endif %}
             {% endfor %}
         {% elif range == '20' %}
@@ -22,6 +25,9 @@
 				<a href="{% url 'showItem' item.itemId %}">
                     <img src = "{% if item.picture %}{{ item.picture.url }} {% else %} {% static 'images/placeholder.png' %} {% endif %}" alt = "{{ item.item_name }}" width="200px" height="200px" class="itempic"\>
                 </a>
+                {{ item.item_name }}
+                </br>
+                £{{ item.price }}
 				{% endif %}
             {% endfor %}
         {% elif range == '50' %}
@@ -31,6 +37,9 @@
 				<a href="{% url 'showItem' item.itemId %}">
                     <img src = "{% if item.picture %}{{ item.picture.url }} {% else %} {% static 'images/placeholder.png' %} {% endif %}" alt = "{{ item.item_name }}" width="200px" height="200px" class="itempic"\>
                 </a>
+                {{ item.item_name }}
+                </br>
+                £{{ item.price }}
 				{% endif %}
             {% endfor %}
         {% elif range == '100' %}
@@ -40,6 +49,9 @@
 				<a href="{% url 'showItem' item.itemId %}">
                     <img src = "{% if item.picture %}{{ item.picture.url }} {% else %} {% static 'images/placeholder.png' %} {% endif %}" alt = "{{ item.item_name }}" width="200px" height="200px" class="itempic"\>
                 </a>
+                {{ item.item_name }}
+                </br>
+                £{{ item.price }}
 				{% endif %}
             {% endfor %}
         {% elif range == '500' %}
@@ -49,6 +61,9 @@
 				<a href="{% url 'showItem' item.itemId %}">
                     <img src = "{% if item.picture %}{{ item.picture.url }} {% else %} {% static 'images/placeholder.png' %} {% endif %}" alt = "{{ item.item_name }}" width="200px" height="200px" class="itempic"\>
                 </a>
+                {{ item.item_name }}
+                </br>
+                £{{ item.price }}
 				{% endif %}
             {% endfor %}
         {% else %}

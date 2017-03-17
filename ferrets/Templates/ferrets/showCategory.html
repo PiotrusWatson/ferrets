@@ -14,6 +14,9 @@
 			<a href="{% url 'showItem' item.itemId %}">
 				<img src = "{% if item.picture %}{{ item.picture.url }} {% else %}{% static 'images/placeholder.png' %} {% endif %}" alt = "{{ item.item_name }}" width="200px" height="200px"\>
 			</a>
+            {{ item.item_name }}
+            </br>
+            £{{ item.price }}
 			{% endfor %}
         {% else %}
             <strong>No items currently in category.</strong>
