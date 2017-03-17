@@ -7,21 +7,25 @@
 	
 {% block content %}
 <div id="content">
-<h1>Welcome to Ferreted Away 
-{% if user.is_authenticated %}
-	<i>{{ user.username }}</i>
-{% endif %}!</h1>
+	<h1>Welcome to Ferreted Away 
+	{% if user.is_authenticated %}
+		<i>{{ user.username }}</i>
+	{% endif %}!</h1>
 <p>Ferreted Away is a site made for student, by students. It's like StudentVoice meets GumTree, but better.
 On Ferreted Away you can buy and sell anything, and it's completely free to join.
 This is the page content
 </div>
 
 <div id = "items">
-<h2> CURRENT TRENDING ITEMS </h2>
-{% for item in items %}
-	<img class = "cropandreduce" src = "{{ item.picture.url }}" alt = "{{ item.item_name }}" width = 200px height = 200px\>
-{% endfor %}
+	<h2> CURRENT TRENDING ITEMS </h2>
+		{% for item in items %}
+		<a href="{% url 'showItem' item.itemId %}">
+			<img class = "cropandreduce" src = "{{ item.picture.url }}" alt = "{{ item.item_name }}" width = 200px height = 200px\>
+		</a>
+		{% endfor %}
 </div>
+
+
 {% if user.is_authenticated %}
 	<h2> YOUR WATCHLIST </h2>
 	<div id = "watchlist">

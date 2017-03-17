@@ -13,9 +13,14 @@
 </head>
 <body>
 	<div id="header">
-		<div id="logo"><img src="{% static 'images/FerretedAwayLogo.png' %}" alt="logo" height="130px"/></div> 
+		<div id="logo">
+			<a href="{% url 'home' %}">
+			<img class="logo" src="{% static 'images/FerretedAwayLogo.png' %}" alt="logo" height="130px"/>
+			</a>
+		</div> 
 		<div class="headerText">erreted Away</div>
 		
+		<div id="searchbar"></div>
 		
 			{% if user.is_authenticated %}
 			<div id="topbutton">
