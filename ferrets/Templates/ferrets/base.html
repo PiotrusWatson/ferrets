@@ -15,6 +15,25 @@
 	<div id="header">
 		<div id="logo"><img src="{% static 'images/FerretedAwayLogo.png' %}" alt="logo" height="130px"/></div> 
 		<div class="headerText">erreted Away</div>
+		
+		
+			{% if user.is_authenticated %}
+			<div id="topbutton">
+				<a href="{% url 'logout' %}">Log Out</a>
+			</div>
+			<div id="bottombutton">
+				<a href="{% url 'myAccount' %}">Account</a>
+			</div>
+			{% else %}
+			<div id="topbutton">
+				<a href="{% url 'login' %}" id="logbutton">Log In</a>
+			</div>
+			<div id="bottombutton">
+				<a href="{% url 'addAccount' %}" id="regbutton">Register</a>
+			</div>
+			{% endif %}
+		</div>
+		
 	</div>
 	<div id="contentwrapper">
 		<div id="sidebar">
@@ -36,14 +55,9 @@
 			<a href="{% url 'about' %}">About</a> | 
 			<a href="{% url 'contact' %}">Contact</a> | 
 			<a href="{% url 'sitemap' %}">Site Map </a> | 
-			<a href="{% url 'faq' %}">FAQ</a> |
-			{% if user.is_authenticated %}
-				<a href="{% url 'logout' %}">Logout</a> | 
-				<a href="{% url 'myAccount' %}">Account</a>
-			{% else %}
-				<a href="{% url 'login' %}">Login</a>
-			{% endif %}
+			<a href="{% url 'faq' %}">FAQ</a>
 		</div>
+		
 	</div>
 </body>
 </html>

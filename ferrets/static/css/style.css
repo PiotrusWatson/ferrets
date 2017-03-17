@@ -34,7 +34,7 @@ body {
 	background: #34abba;
 	font-size: 50px;
 	color: #fff;
-	height: 140px;
+	height: 130px;
 	padding: 10px;
 }
 
@@ -54,6 +54,45 @@ body {
 	padding:10px;
 }
 
+#topbutton {
+	background-color: #cfcfcf;
+	position: absolute;
+	top: 20px;
+	right: 10px;
+	border-radius: 3px;
+	padding: 5px;
+	font-size: 15px !important;
+	width: 60px;
+	text-align: center;
+	box-shadow: 0px 0px 7px #348993;
+}
+
+#bottombutton {
+	background-color: #cfcfcf;
+	position: absolute;
+	top: 55px;
+	right: 10px;
+	border-radius: 3px;
+	padding: 5px;
+	font-size: 15px !important;
+	width: 60px;
+	text-align: center;
+	box-shadow: 0px 0px 7px #348993;
+}
+
+#accounticon {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	height: 100px;
+	width: 100px;
+}
+
+
+b, strong {
+	color:#34abba;
+}
+
 a.itemlink {
 	color: #121411;
 }
@@ -68,7 +107,7 @@ h1 {
 
 h2 {
 	size: 14px;
-	color: 34abba;
+	color: #34abba;
 	text-transform: small caps;
 
 }
@@ -84,7 +123,7 @@ a h2:hover {
 
 h3 {
 	size: 12px;
-	color: 34abba;
+	color: #34abba;
 	text-transform: small caps;
 
 }
@@ -112,6 +151,10 @@ a:hover {
 cat {
 	margin-left: 50px;
 	border: 1px solid #fff;
+}
+
+itempic {
+	margin-right: 15px;
 }
 
 .cropandreduce{
