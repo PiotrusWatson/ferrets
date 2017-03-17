@@ -140,7 +140,7 @@ def addItems(request, username):
 
                 item.save()
 
-                return render(request, "ferrets/addItems.html")
+                return HttpResponseRedirect(reverse('myItems'))
     else:
         print(form.errors)
     context_dict = {'form': form}
