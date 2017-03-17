@@ -50,7 +50,7 @@ class UserProfile(models.Model):
 
 class Watchlist(models.Model):
     user = models.ForeignKey(User)
-    item = models.ForeignKey(Item)
+    item = models.IntegerField(blank=False)
     date_added = models.DateTimeField(auto_now=False, auto_now_add=True)
 
 class Comments(models.Model):

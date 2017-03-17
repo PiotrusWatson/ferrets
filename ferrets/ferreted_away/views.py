@@ -106,7 +106,10 @@ def addAccount(request):
 @login_required
 def myAccount(request):
     my_items = Item.objects.filter(user=request.user).order_by("-date_added")[:5]
-    my_watchlist = Item.objects.filter(item_name__in = Watchlist.objects.filter(user=request.user)).order_by("-date_added")[:5]
+
+    item_ids = Watchlist.objects.filter(user=request.user).order_by("-date_added").values_list('item')[:5]
+
+    my_watchlist = Item.objects.filter(itemId__in=item_ids)
 
     context_dict = {"my_items": my_items, "my_watchlist": my_watchlist, "user": request.user}
     return render(request, "ferrets/myaccount.html", context_dict)
@@ -146,10 +149,15 @@ def addItems(request, username):
 
 @login_required
 def myWatchlist(request):
-    watchlist = Item.objects.filter(item_name__in=Watchlist.objects.filter(user=request.user)).order_by(
-        "-date_added")[:5]
 
-    context_dict = {"watchlist": watchlist,
+    item_ids = Watchlist.objects.filter(user=request.user).order_by("-date_added").values_list('item')[:5]
+
+    my_watchlist = Item.objects.filter(itemId__in = item_ids)
+
+
+
+
+    context_dict = {"watchlist": my_watchlist,
                     }
     return render(request, "ferrets/mywatchlist.html", context_dict)
 
@@ -249,7 +257,7 @@ def showItem(request, item_itemId):
             context_dict['inWatchlist'] = False
             if request.user.is_authenticated:
                 try:
-                    Watchlist.objects.filter(user=request.user).get(item=item)
+                    Watchlist.objects.filter(user=request.user).get(item=item_itemId)
                     context_dict['inWatchlist'] = True
                 except:
                     context_dict['inWatchlist'] = False
@@ -291,7 +299,7 @@ def addWatchlist(request, item_itemid):
         item = Item.objects.get(itemId=item_itemid)
 
         if request.user.is_authenticated:
-            w = Watchlist(item=item, user=request.user)
+            w = Watchlist(item=item_itemid, user=request.user)
             w.save()
 
         return HttpResponseRedirect(reverse('showItem',args=(item_itemid,)))
@@ -308,7 +316,7 @@ def removeWatchlist(request, item_itemid):
         item = Item.objects.get(itemId=item_itemid)
 
         if request.user.is_authenticated:
-            watchlist = Watchlist.objects.filter(user=request.user).get(item=item)
+            watchlist = Watchlist.objects.filter(user=request.user).get(item=item_itemid)
 
             if watchlist:
                 watchlist.delete()
