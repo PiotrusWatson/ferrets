@@ -14,7 +14,7 @@
 		{% for item in my_items %}
 			<td>
 				<a href="{% url 'showItem' item.itemId %}">
-					<img src = "{{ item.picture.url }}" alt = "{{ item.item_name }}" width="200px"\>
+					<img src = "{% if item.picture %}{{ item.picture.url }} {% else %} {% static 'images/placeholder.png' %} {% endif %}" alt = "{{ item.item_name }}" width="200px"\>
 				</a>
 			</td>
 		{% endfor %}  

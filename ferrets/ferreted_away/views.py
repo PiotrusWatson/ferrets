@@ -125,15 +125,15 @@ def myItems(request):
 def addItems(request, username):
     form = ItemForm()
     if request.method == 'POST':
-        form = ItemForm(request.POST)
+        form = ItemForm(request.POST, request.FILES)
         if form.is_valid():
             if username:
                 item = form.save(commit=False)
                 item.user = request.user
 
 
-                if 'image' in request.FILES:
-                    item.picture = request.FILES['image']
+                if 'picture' in request.FILES:
+                    item.picture = form.cleaned_data[]
 
                 item.save()
 

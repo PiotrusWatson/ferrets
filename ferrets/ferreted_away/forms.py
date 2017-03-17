@@ -11,6 +11,7 @@ class ItemForm(forms.ModelForm):
     description = forms.CharField(max_length=350,
                                   help_text="Please insert a Description")
     views = forms.IntegerField(widget=forms.HiddenInput(), initial=0, required=False)
+    picture = forms.ImageField()
     
 
 
@@ -19,8 +20,6 @@ class ItemForm(forms.ModelForm):
         model = Item
         exclude = ('user',)
         fields = ('category','item_name','price','description','picture' )
-
-
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
@@ -31,7 +30,7 @@ class UserForm(forms.ModelForm):
 
 
 class UserProfileForm(forms.ModelForm):
-
+    picture = forms.ImageField
     class Meta:
         model = UserProfile
         fields = ('picture',)
