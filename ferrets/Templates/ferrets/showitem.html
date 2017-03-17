@@ -13,11 +13,18 @@
 		<br />
 		<img src="{{sellUser.picture}}" width="80px" height="80px" alt="seller's icon">
 		Sold by <b>{{ sellUser.user.username }}</b>
+		<p>
+		{% if seller %}
+			<a href="{% url 'deleteItem' item.itemId %}" class="itemlink">Delete Item</a>
+		{% endif %}
+		
+		{% if logged %}
+			WATCHLIST
+		{% endif %}
 	</div>
 	
 	<div id="rightmost">
 	{{item.description}}
 	</div>
-	
 	
 {% endblock %}
