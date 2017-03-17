@@ -223,10 +223,10 @@ def showItem(request, item_itemId):
 
                 logged_in = True
 
-                if request.user.username == item.user:
+                if request.user == item.user:
                     comments = Comments.objects.filter(item=item).order_by('date_added')
                 else:
-                    comments = Comments.objects.filter(item=item, user__in=[item.user, request.user.username]).order_by(
+                    comments = Comments.objects.filter(item=item, user__in=[item.user, request.user]).order_by(
                         'date_added')
 
             else:
