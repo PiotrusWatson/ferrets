@@ -2,10 +2,11 @@
 {% load staticfiles %}
 
 {% block title_block %}
-		- Your Account
+	- Your Account
 {% endblock %}
 	
 {% block content %}
+	<!--<img src="{{user.picture}}" id="accounticon" alt="your icon">-->
 	<h2>Hello, {{user.username}}!</h2>
 	<h3><a href="{% url 'myItems' %}">My Items</a></h3> 
 	{% if my_items %}

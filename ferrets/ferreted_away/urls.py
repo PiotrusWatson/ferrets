@@ -20,4 +20,5 @@ urlpatterns = [
 	url(r'^item/(?P<item_itemId>[\w\-]+)/$', views.showItem, name='showItem'),
     url(r'^browsebyprice/pricerange/(?P<priceRange>[\w\-]+)/$', views.priceRange, name='priceRange'),
     url(r'^browsebyprice/$', views.browsePrice, name='browsePrice'),
+    url(r'^myaccount/myitems/(?P<item_itemid>[\w\-]+)/delete/$', views.deleteItem, name='deleteItem'),
 ]
