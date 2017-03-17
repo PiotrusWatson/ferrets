@@ -214,7 +214,7 @@ def showItem(request, item_itemId):
             else:
                 print(commentForm.errors)
         else:
-
+            context_dict['seller'] = False
             commentForm = CommentForm()
 
             item.views = item.views + 1
@@ -224,6 +224,7 @@ def showItem(request, item_itemId):
                 logged_in = True
 
                 if request.user == item.user:
+                    context_dict['seller'] = True
                     comments = Comments.objects.filter(item=item).order_by('date_added')
                 else:
                     comments = Comments.objects.filter(item=item, user__in=[item.user, request.user]).order_by(
