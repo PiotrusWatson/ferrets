@@ -106,7 +106,10 @@ def addAccount(request):
 @login_required
 def myAccount(request):
     my_items = Item.objects.filter(user=request.user).order_by("-date_added")[:5]
-    my_watchlist = Item.objects.filter(item_name__in = Watchlist.objects.filter(user=request.user)).order_by("-date_added")[:5]
+
+    item_ids = Watchlist.objects.filter(user=request.user).order_by("-date_added").values_list('item')
+
+    my_watchlist = Item.objects.filter(itemId__in=item_ids)[:5]
 
     context_dict = {"my_items": my_items, "my_watchlist": my_watchlist, "user": request.user}
     return render(request, "ferrets/myaccount.html", context_dict)
@@ -118,7 +121,7 @@ def myItems(request):
 	
     context_dict = {"my_items": items,
                     }
-    return render(request, "ferrets/myitems.html", context_dict)
+    return render(request, "ferrets/myItems.html", context_dict)
 
 
 @login_required
@@ -137,7 +140,7 @@ def addItems(request, username):
 
                 item.save()
 
-                return render(request, "ferrets/addItems.html")
+                return HttpResponseRedirect(reverse('myItems'))
     else:
         print(form.errors)
     context_dict = {'form': form}
@@ -146,10 +149,15 @@ def addItems(request, username):
 
 @login_required
 def myWatchlist(request):
-    watchlist = Item.objects.filter(item_name__in=Watchlist.objects.filter(user=request.user)).order_by(
-        "-date_added")[:5]
 
-    context_dict = {"watchlist": watchlist,
+    item_ids = Watchlist.objects.filter(user=request.user).order_by("-date_added").values_list('item')[:5]
+
+    my_watchlist = Item.objects.filter(itemId__in = item_ids)
+
+
+
+
+    context_dict = {"watchlist": my_watchlist,
                     }
     return render(request, "ferrets/mywatchlist.html", context_dict)
 
@@ -205,7 +213,7 @@ def showItem(request, item_itemId):
             commentForm = CommentForm(data=request.POST)
 
             if commentForm.is_valid():
-                comment = commentForm.save()
+                comment = commentForm.save(commit=False)
 
                 comment.user = request.user
                 comment.item = item
@@ -213,35 +221,48 @@ def showItem(request, item_itemId):
 
             else:
                 print(commentForm.errors)
-        else:
 
-            commentForm = CommentForm()
+        context_dict['seller'] = False
+        commentForm = CommentForm()
 
-            item.views = item.views + 1
+        item.views = item.views + 1
 
-            if request.user.is_authenticated:
+        if request.user.is_authenticated:
 
-                logged_in = True
+            logged_in = True
 
-                if request.user == item.user:
-                    comments = Comments.objects.filter(item=item).order_by('date_added')
-                else:
-                    comments = Comments.objects.filter(item=item, user__in=[item.user, request.user]).order_by(
+            if request.user == item.user:
+                context_dict['seller'] = True
+                comments = Comments.objects.filter(item=item).order_by('date_added')
+            else:
+                comments = Comments.objects.filter(item=item, user__in=[item.user, request.user]).order_by(
                         'date_added')
 
-            else:
+        else:
 
-                logged_in = False
+            logged_in = False
 
-                comments = Comments.objects.filter(item=item, user=item.user).order_by('date_added')
+            comments = Comments.objects.filter(item=item, user=item.user).order_by('date_added')
 
-            context_dict['item'] = item
+        context_dict['item'] = item
 
-            context_dict['comments'] = comments
 
-            context_dict['logged'] = logged_in
+        context_dict['sellUser'] = UserProfile.objects.get(user=item.user)
 
-            context_dict['commentForm'] = commentForm
+        context_dict['comments'] = comments
+
+        context_dict['logged'] = logged_in
+
+        context_dict['commentForm'] = commentForm
+
+        context_dict['inWatchlist'] = False
+        if request.user.is_authenticated:
+            try:
+                Watchlist.objects.filter(user=request.user).get(item=item_itemId)
+                context_dict['inWatchlist'] = True
+            except:
+                context_dict['inWatchlist'] = False
+
 
 
     except Item.DoesNotExist:
@@ -252,12 +273,59 @@ def showItem(request, item_itemId):
 
     return render(request, "ferrets/showitem.html", context_dict)
 
-def deleteItem(request, itemId):
-    context_dict = {}
-##    try:
-        
-##    except:
+@login_required
+def deleteItem(request, item_itemid):
+    try:
 
+
+
+        item = Item.objects.get(itemId=item_itemid)
+
+        if request.user.is_authenticated:
+
+            if request.user == item.user:
+                item.delete()
+
+        return HttpResponseRedirect(reverse('myAccount'))
+
+
+    except Item.DoesNotExist:
+
+        return HttpResponseRedirect(reverse('myAccount'))
+
+@login_required
+def addWatchlist(request, item_itemid):
+    try:
+
+        item = Item.objects.get(itemId=item_itemid)
+
+        if request.user.is_authenticated:
+            w = Watchlist(item=item_itemid, user=request.user)
+            w.save()
+
+        return HttpResponseRedirect(reverse('showItem',args=(item_itemid,)))
+
+    except Item.DoesNotExist:
+
+        return HttpResponseRedirect(reverse('myAccount'))
+
+
+@login_required
+def removeWatchlist(request, item_itemid):
+    try:
+
+        item = Item.objects.get(itemId=item_itemid)
+
+        if request.user.is_authenticated:
+            watchlist = Watchlist.objects.filter(user=request.user).get(item=item_itemid)
+
+            if watchlist:
+                watchlist.delete()
+
+        return HttpResponseRedirect(reverse('showItem', args=(item_itemid,)))
+
+    except Item.DoesNotExist:
+        return HttpResponseRedirect(reverse('myAccount'))
 
 @csrf_exempt
 def send_message(request):

@@ -19,48 +19,25 @@
 		{% endif %}
 		
 		{% if logged %}
+<<<<<<< HEAD
 			{% if inWatchlist %}
 			<a href="{% url 'removeWatchlist' item.itemId %}" class="itemlink">Remove From Watchlist</a>
 			{% else %}
 			<a href="{% url 'addWatchlist' item.itemId %}" class="itemlink">Add To Watchlist</a>
+=======
+			{% if watchlist %}
+				<div id="watchlistIn">this item is in your watchlist</div>
+			{% else %}
+			<a href="">
+				<div id="watchlistAdd">Add to watchlist</div>
+			</a>
+>>>>>>> fffd75ac541832f1c0006bf4162e9583b22076ae
 			{% endif %}
 		{% endif %}
 	</div>
 	
 	<div id="rightmost">
 	{{item.description}}
-	
-	<h2>Comments</h2>
-		<table>
-		
-		{% for comment in comments %}
-		
-		<tr>
-				<td>
-					{{comment.user.username}}
-					</br>
-					{{comment.date_added}}
-					
-				</td>
-				<td>
-					{{comment.comment}}
-				</td> 
-		</tr>
-		{% endfor %}
-		</table>
-		<tr>
-		{% if logged %}
-			<form id="commentForm" method="POST" action="{% url 'showItem' item.itemId %}">
-		
-			{% csrf_token %}
-		
-			<!-- Display each form -->
-			{{ commentForm.as_p }}
-		
-			<input type="submit" name="submit" value="Add Comment"/>
-		{% endif %}
-		</tr>
-		
 	</div>
 	
 {% endblock %}

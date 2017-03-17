@@ -13,9 +13,14 @@
 </head>
 <body>
 	<div id="header">
-		<div id="logo"><img src="{% static 'images/FerretedAwayLogo.png' %}" alt="logo" height="130px"/></div> 
+		<div id="logo">
+			<a href="{% url 'home' %}">
+			<img class="logo" src="{% static 'images/FerretedAwayLogo.png' %}" alt="logo" height="130px"/>
+			</a>
+		</div> 
 		<div class="headerText">erreted Away</div>
 		
+		<div id="searchbar"></div>
 		
 			{% if user.is_authenticated %}
 			<div id="topbutton">
@@ -37,13 +42,17 @@
 	</div>
 	<div id="contentwrapper">
 		<div id="sidebar">
-			<ul>
-				<li><a href="{% url 'home' %}">Home</a></li>
-				<li><a href="{% url 'categories' %}">Categories</a></li>
+			<a href="{% url 'home' %}">Home</a>
+			<hr>
+			{% if user.is_authenticated %}
+				<a href="{% url 'myAccount' %}">Account</a>
+				<hr>
+			{% endif %}
+			
+			<a href="{% url 'categories' %}">Categories</a>
 				{% get_category_list categories %}
-				<li><a href="{% url 'browsePrice' %}">Browse by Price</a></li>
-				
-			</ul>
+			<hr>
+				<a href="{% url 'browsePrice' %}">Browse by Price</a>
 		</div>
 		
 		<div id="content">

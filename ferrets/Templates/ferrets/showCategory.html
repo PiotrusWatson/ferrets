@@ -11,7 +11,9 @@
 		
 		<div id = "items">
 			{% for item in items %}
-				<img src = "{{ item.picture.url }}" alt = "{{ item.item_name }}" width="200px"\>
+			<a href="{% url 'showItem' item.itemId %}">
+				<img src = "{% if item.picture %}{{ item.picture.url }} {% else %}{% static 'images/placeholder.png' %} {% endif %}" alt = "{{ item.item_name }}" width="200px" height="200px"\>
+			</a>
 			{% endfor %}
         {% else %}
             <strong>No items currently in category.</strong>

@@ -17,6 +17,8 @@
 			<a href="{% url 'showItem' item.itemId %}">
 			<img src = "{% if item.picture %}{{ item.picture.url }} {% else %} {% static 'images/placeholder.png' %} {% endif %}" alt = "{{ item.item_name }}" width="200px"\>
 			</a>
+			</br>
+			<a class="itemlink" href="{% url 'showItem' item.itemId %}">{{item.item_name}}</a>
 			</td>
 		{% endfor %}  
 		</tr>
@@ -25,7 +27,7 @@
         <h5>You haven't uploaded any items for sale!</h5>
     {% endif %}
 	<h3><a href="{% url 'myWatchlist' %}">My Watchlist</a></h3>
-	{% if my_items %}
+	{% if my_watchlist %}
 	<table>
 		<tr>
 		{% for item in my_watchlist %}
@@ -33,6 +35,8 @@
 			<a href="{% url 'showItem' item.itemId %}">
 			<img src = "{% if item.picture %}{{ item.picture.url }} {% else %} {% static 'images/placeholder.png' %} {% endif %}" alt = "{{ item.item_name }}" width="200px"\>
 			</a>
+			</br>
+			<a class="itemlink" href="{% url 'showItem' item.itemId %}">{{item.item_name}}</a>
 			</td>
 		{% endfor %} 
 		</tr>
