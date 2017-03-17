@@ -140,7 +140,7 @@ def addItems(request, username):
 
 @login_required
 def myWatchlist(request):
-    watchlist = Watchlist.filter(user=request.user).order_by("-date_added")[:5]
+    watchlist = Watchlist.objects.filter(user=request.user).order_by("-date_added")[:5]
 
     context_dict = {"watchlist": watchlist,
                     }
