@@ -83,10 +83,11 @@ body {
 #searchbar {
 	position: absolute;
 	width: 200px;
-	height: 100px;
+	height: 30px;
 	background-color: #fff;
-	top: 50px;
+	top: 110px;
 	right: 20px;
+	border-radius: 3px;
 }
 
 
@@ -116,6 +117,27 @@ body {
 #rightmost {
 }
 
+#watchlistAdd{
+	background-color: #088091;
+	border-radius: 3px;
+	padding: 5px;
+	font-size: 15px !important;
+	width: 240px;
+	text-align: center;
+	box-shadow: 0px 0px 7px #348993;
+}
+
+#watchlistIn{
+	background-color: #9bd9e0;
+	border-radius: 3px;
+	padding: 5px;
+	font-size: 15px !important;
+	width: 240px;
+	text-align: center;
+	box-shadow: 0px 0px 7px #348993;
+}
+
+
 /* end of item page stuff */
 
 b, strong {
@@ -123,7 +145,7 @@ b, strong {
 }
 
 a.itemlink {
-	color: #121411;
+	color: #09616d;
 }
 a.itemlink:hover{
 	color: #abdefc;
@@ -189,8 +211,12 @@ a img {
 }
 
 
-
 .cropandreduce{
 	object-fit: cover;
 	border-radius:50%;
+	margin-right: 20px;
+}
+
+.logo {
+	border: 0px solid #34abba;
 }

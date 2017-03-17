@@ -8,7 +8,7 @@
 {% block content %}
 	<h1>{{item.item_name}} - £{{item.price}}</h1>
 	<div id="leftmost">
-		<img src = "{% if item.picture %}{{ item.picture.url }} {% else %} {% static 'images/placeholder.png' %} {% endif %}" alt = "{{ item.item_name }}" width="200px" id="itempic"\>
+		<img src = "{% if item.picture %}{{ item.picture.url }} {% else %} {% static 'images/placeholder.png' %} {% endif %}" alt = "{{ item.item_name }}" width="240px" id="itempic"\>
 		<br />
 		<br />
 		<img src="{{sellUser.picture}}" width="80px" height="80px" alt="seller's icon">

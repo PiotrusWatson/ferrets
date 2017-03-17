@@ -8,4 +8,17 @@
 {% block content %}
 	<h2>Hello, {{user.username}}!</h2>
 	<h3>My Watchlist</h3> 
+	
+	{% if watchlist %}
+
+		{% for item in watchlist %}
+			<td>
+				<a href="{% url 'showItem' item.itemId %}">
+					<img src = "{% if item.picture %}{{ item.picture.url }} {% else %} {% static 'images/placeholder.png' %} {% endif %}" alt = "{{ item.item_name }}" width="200px"\>
+				</a>
+			</td>
+		{% endfor %}  
+    {% else %}
+        <h5>You don't have any items in your watchlist!</h5>
+    {% endif %}
 {% endblock %}
