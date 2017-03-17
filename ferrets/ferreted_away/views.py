@@ -213,7 +213,7 @@ def showItem(request, item_itemId):
             commentForm = CommentForm(data=request.POST)
 
             if commentForm.is_valid():
-                comment = commentForm.save()
+                comment = commentForm.save(commit=False)
 
                 comment.user = request.user
                 comment.item = item
@@ -221,46 +221,47 @@ def showItem(request, item_itemId):
 
             else:
                 print(commentForm.errors)
-        else:
-            context_dict['seller'] = False
-            commentForm = CommentForm()
 
-            item.views = item.views + 1
+        context_dict['seller'] = False
+        commentForm = CommentForm()
 
-            if request.user.is_authenticated:
+        item.views = item.views + 1
 
-                logged_in = True
+        if request.user.is_authenticated:
 
-                if request.user == item.user:
-                    context_dict['seller'] = True
-                    comments = Comments.objects.filter(item=item).order_by('date_added')
-                else:
-                    comments = Comments.objects.filter(item=item, user__in=[item.user, request.user]).order_by(
+            logged_in = True
+
+            if request.user == item.user:
+                context_dict['seller'] = True
+                comments = Comments.objects.filter(item=item).order_by('date_added')
+            else:
+                comments = Comments.objects.filter(item=item, user__in=[item.user, request.user]).order_by(
                         'date_added')
 
-            else:
+        else:
 
-                logged_in = False
+            logged_in = False
 
-                comments = Comments.objects.filter(item=item, user=item.user).order_by('date_added')
+            comments = Comments.objects.filter(item=item, user=item.user).order_by('date_added')
 
-            context_dict['item'] = item
+        context_dict['item'] = item
 
-            context_dict['sellUser'] = UserProfile.objects.get(user=item.user)
 
-            context_dict['comments'] = comments
+        context_dict['sellUser'] = UserProfile.objects.get(user=item.user)
 
-            context_dict['logged'] = logged_in
+        context_dict['comments'] = comments
 
-            context_dict['commentForm'] = commentForm
+        context_dict['logged'] = logged_in
 
-            context_dict['inWatchlist'] = False
-            if request.user.is_authenticated:
-                try:
-                    Watchlist.objects.filter(user=request.user).get(item=item_itemId)
-                    context_dict['inWatchlist'] = True
-                except:
-                    context_dict['inWatchlist'] = False
+        context_dict['commentForm'] = commentForm
+
+        context_dict['inWatchlist'] = False
+        if request.user.is_authenticated:
+            try:
+                Watchlist.objects.filter(user=request.user).get(item=item_itemId)
+                context_dict['inWatchlist'] = True
+            except:
+                context_dict['inWatchlist'] = False
 
 
 

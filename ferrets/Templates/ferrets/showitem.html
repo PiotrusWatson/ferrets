@@ -29,6 +29,38 @@
 	
 	<div id="rightmost">
 	{{item.description}}
+	
+	<h2>Comments</h2>
+		<table>
+		
+		{% for comment in comments %}
+		
+		<tr>
+				<td>
+					{{comment.user.username}}
+					</br>
+					{{comment.date_added}}
+					
+				</td>
+				<td>
+					{{comment.comment}}
+				</td> 
+		</tr>
+		{% endfor %}
+		</table>
+		<tr>
+		{% if logged %}
+			<form id="commentForm" method="POST" action="{% url 'showItem' item.itemId %}">
+		
+			{% csrf_token %}
+		
+			<!-- Display each form -->
+			{{ commentForm.as_p }}
+		
+			<input type="submit" name="submit" value="Add Comment"/>
+		{% endif %}
+		</tr>
+		
 	</div>
 	
 {% endblock %}
