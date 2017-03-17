@@ -10,14 +10,19 @@
 	<h3>My Watchlist</h3> 
 	
 	{% if watchlist %}
-
+	<table>
+		<tr>
 		{% for item in watchlist %}
 			<td>
 				<a href="{% url 'showItem' item.itemId %}">
 					<img src = "{% if item.picture %}{{ item.picture.url }} {% else %} {% static 'images/placeholder.png' %} {% endif %}" alt = "{{ item.item_name }}" width="200px"\>
 				</a>
+				</br>
+				<a class="itemlink" href="{% url 'showItem' item.itemId %}">{{item.item_name}}</a>
 			</td>
-		{% endfor %}  
+		{% endfor %}
+		</tr>
+	</table>
     {% else %}
         <h5>You don't have any items in your watchlist!</h5>
     {% endif %}
