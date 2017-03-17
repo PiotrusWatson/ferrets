@@ -121,7 +121,7 @@ def myItems(request):
 	
     context_dict = {"my_items": items,
                     }
-    return render(request, "ferrets/myitems.html", context_dict)
+    return render(request, "ferrets/myItems.html", context_dict)
 
 
 @login_required
