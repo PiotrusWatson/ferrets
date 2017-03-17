@@ -107,9 +107,9 @@ def addAccount(request):
 def myAccount(request):
     my_items = Item.objects.filter(user=request.user).order_by("-date_added")[:5]
 
-    item_ids = Watchlist.objects.filter(user=request.user).order_by("-date_added").values_list('item')[:5]
+    item_ids = Watchlist.objects.filter(user=request.user).order_by("-date_added").values_list('item')
 
-    my_watchlist = Item.objects.filter(itemId__in=item_ids)
+    my_watchlist = Item.objects.filter(itemId__in=item_ids)[:5]
 
     context_dict = {"my_items": my_items, "my_watchlist": my_watchlist, "user": request.user}
     return render(request, "ferrets/myaccount.html", context_dict)

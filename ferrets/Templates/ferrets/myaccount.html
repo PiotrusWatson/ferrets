@@ -17,6 +17,8 @@
 			<a href="{% url 'showItem' item.itemId %}">
 			<img src = "{% if item.picture %}{{ item.picture.url }} {% else %} {% static 'images/placeholder.png' %} {% endif %}" alt = "{{ item.item_name }}" width="200px"\>
 			</a>
+			</br>
+			<a class="itemlink" href="{% url 'showItem' item.itemId %}">{{item.item_name}}</a>
 			</td>
 		{% endfor %}  
 		</tr>
@@ -33,6 +35,8 @@
 			<a href="{% url 'showItem' item.itemId %}">
 			<img src = "{% if item.picture %}{{ item.picture.url }} {% else %} {% static 'images/placeholder.png' %} {% endif %}" alt = "{{ item.item_name }}" width="200px"\>
 			</a>
+			</br>
+			<a class="itemlink" href="{% url 'showItem' item.itemId %}">{{item.item_name}}</a>
 			</td>
 		{% endfor %} 
 		</tr>
