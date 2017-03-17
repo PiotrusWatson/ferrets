@@ -132,8 +132,8 @@ def addItems(request, username):
                 item.user = request.user
 
 
-                if 'picture' in request.FILES:
-                    item.picture = request.FILES['picture']
+                if 'image' in request.FILES:
+                    item.picture = request.FILES['image']
 
                 item.save()
 
