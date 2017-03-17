@@ -246,6 +246,15 @@ def showItem(request, item_itemId):
 
             context_dict['commentForm'] = commentForm
 
+            context_dict['inWatchlist'] = False
+            if request.user.is_authenticated:
+                try:
+                    Watchlist.objects.filter(user=request.user).get(item=item)
+                    context_dict['inWatchlist'] = True
+                except:
+                    context_dict['inWatchlist'] = False
+
+
 
     except Item.DoesNotExist:
 
@@ -257,7 +266,6 @@ def showItem(request, item_itemId):
 
 @login_required
 def deleteItem(request, item_itemid):
-    context_dict = {}
     try:
 
 
@@ -271,6 +279,22 @@ def deleteItem(request, item_itemid):
 
         return HttpResponseRedirect(reverse('myAccount'))
 
+
+    except Item.DoesNotExist:
+
+        return HttpResponseRedirect(reverse('myAccount'))
+
+@login_required
+def addWatchlist(request, item_itemid):
+    try:
+
+        item = Item.objects.get(itemId=item_itemid)
+
+        if request.user.is_authenticated:
+            w = Watchlist(item=item, user=request.user)
+            w.save()
+
+        return HttpResponseRedirect(reverse('showItem',args=(item_itemid,)))
 
     except Item.DoesNotExist:
 
@@ -278,28 +302,21 @@ def deleteItem(request, item_itemid):
 
 
 @login_required
-def deleteItem(request, item_itemid):
-    context_dict = {}
+def removeWatchlist(request, item_itemid):
     try:
-
-
 
         item = Item.objects.get(itemId=item_itemid)
 
         if request.user.is_authenticated:
+            watchlist = Watchlist.objects.filter(user=request.user).get(item=item)
 
-            if request.user == item.user:
-                item.delete()
+            if watchlist:
+                watchlist.delete()
 
-        return HttpResponseRedirect(reverse('myAccount'))
-
+        return HttpResponseRedirect(reverse('showItem', args=(item_itemid,)))
 
     except Item.DoesNotExist:
-
         return HttpResponseRedirect(reverse('myAccount'))
-
-
-
 
 @csrf_exempt
 def send_message(request):

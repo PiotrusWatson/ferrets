@@ -19,7 +19,11 @@
 		{% endif %}
 		
 		{% if logged %}
-			WATCHLIST
+			{% if inWatchlist %}
+			<a href="{% url 'removeWatchlist' item.itemId %}" class="itemlink">Remove From Watchlist</a>
+			{% else %}
+			<a href="{% url 'addWatchlist' item.itemId %}" class="itemlink">Add To Watchlist</a>
+			{% endif %}
 		{% endif %}
 	</div>
 	
