@@ -252,11 +252,26 @@ def showItem(request, item_itemId):
 
     return render(request, "ferrets/showitem.html", context_dict)
 
-def deleteItem(request, itemId):
+@login_required
+def deleteItem(request, item_itemid):
     context_dict = {}
-##    try:
-        
-##    except:
+    try:
+
+
+
+        item = Item.objects.get(itemId=item_itemid)
+
+        if request.user.is_authenticated:
+
+            if request.user == item.user:
+                item.delete()
+
+        return HttpResponseRedirect(reverse('myAccount'))
+
+
+    except Item.DoesNotExist:
+
+        return HttpResponseRedirect(reverse('myAccount'))
 
 
 @csrf_exempt
