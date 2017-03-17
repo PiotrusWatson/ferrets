@@ -23,4 +23,5 @@ urlpatterns = [
     url(r'^myaccount/myitems/(?P<item_itemid>[\w\-]+)/delete/$', views.deleteItem, name='deleteItem'),
     url(r'^myaccount/(?P<item_itemid>[\w\-]+)/addWatchlist/$', views.addWatchlist, name='addWatchlist'),
     url(r'^myaccount/(?P<item_itemid>[\w\-]+)/removeWatchlist/$', views.removeWatchlist, name='removeWatchlist'),
+    url(r'^searchresults/$', views.searchresults, name='searchresults'),
 ]

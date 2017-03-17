@@ -20,7 +20,7 @@
 		</div> 
 		<div class="headerText">erreted Away</div>
 		
-		<div id="searchbar"></div>
+		<div id="searchbar"><gcse:searchbox-only resultsUrl="{% url 'searchresults' %}"></gcse:searchbox-only></div>
 		
 			{% if user.is_authenticated %}
 			<div id="topbutton">
@@ -68,6 +68,17 @@
 		</div>
 		
 	</div>
+	<script>
+	  (function() {
+	    var cx = '001784674130566875644:_toxp1nrbns';
+	    var gcse = document.createElement('script');
+	    gcse.type = 'text/javascript';
+	    gcse.async = true;
+	    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+	    var s = document.getElementsByTagName('script')[0];
+	    s.parentNode.insertBefore(gcse, s);
+	  })();
+	</script>
 </body>
 </html>
 	

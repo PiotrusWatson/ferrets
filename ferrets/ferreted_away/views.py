@@ -26,6 +26,9 @@ def home(request):
 
     return render(request, 'ferrets/home.html', context=context_dict)
 
+def searchresults(request):
+    return render(request, 'ferrets/searchresults.html')
+
 
 def about(request):
     return render(request, 'ferrets/about.html')

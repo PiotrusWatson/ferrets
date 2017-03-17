@@ -1,0 +1,20 @@
+{% extends 'ferrets/base.html' %}
+{% load staticfiles %}
+{% block title_block %}
+    - Search Results
+{% endblock %}
+
+{% block content %}
+<gcse:searchresults-only></gcse:searchresults-only>
+<script>
+  (function() {
+    var cx = '001784674130566875644:_toxp1nrbns';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+{% endblock %}
