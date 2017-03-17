@@ -237,6 +237,8 @@ def showItem(request, item_itemId):
 
             context_dict['item'] = item
 
+            context_dict['sellUser'] = UserProfile.objects.get(user=item.user)
+
             context_dict['comments'] = comments
 
             context_dict['logged'] = logged_in
@@ -272,6 +274,30 @@ def deleteItem(request, item_itemid):
     except Item.DoesNotExist:
 
         return HttpResponseRedirect(reverse('myAccount'))
+
+
+@login_required
+def deleteItem(request, item_itemid):
+    context_dict = {}
+    try:
+
+
+
+        item = Item.objects.get(itemId=item_itemid)
+
+        if request.user.is_authenticated:
+
+            if request.user == item.user:
+                item.delete()
+
+        return HttpResponseRedirect(reverse('myAccount'))
+
+
+    except Item.DoesNotExist:
+
+        return HttpResponseRedirect(reverse('myAccount'))
+
+
 
 
 @csrf_exempt
