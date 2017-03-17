@@ -18,6 +18,6 @@ urlpatterns = [
 	url(r'send_mail/$', views.send_message, name='sendMessage'),
     url(r'^category/(?P<category_name_slug>[\w\-]+)/$', views.showCategory, name='showCategory'),
 	url(r'^item/(?P<item_itemid>[\w\-]+)/$', views.showItem, name='showItem'),
-    url(r'^broswebyprice/pricerange/(?P<pricerange>[\w\-]+)/$', views.priceRange, name='priceRange'),
+    url(r'^browsebyprice/pricerange/(?P<priceRange>[\w\-]+)/$', views.priceRange, name='priceRange'),
     url(r'^browsebyprice/$', views.browsePrice, name='browsePrice'),
 ]

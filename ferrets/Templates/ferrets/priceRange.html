@@ -5,23 +5,44 @@
 {% endblock %}
 
 {% block content %}
-    {% if min_val == 0.00}
-        <h1>Under £20</h1>
-    {% elseif max_val == 9999999999999999999.99 %}
-        <h1>Over £500</h1>
-    {% else %}
-        <h1>{{ min_val }} to {{ max_val }}</h1>
-    {% endif %}
     {% if items %}
-		
-		<div id = "items">
-			{% for item in items %}
-                {% if item.price >= min_val and item.price <= max_val %}
-				    <img src = "{{ item.picture.url }}" alt = "{{ item.item_name }}" width="200px"\>
+		{% if range == '0'}
+            <h1>Under £20</h1>
+            {% for item in items %}
+                {% if item.price <= 20.00 %}
+                    <img src = "{{ item.picture.url }}" alt = "{{ item.item_name }}" width="200px"\>
                 {% endif %}
-			{% endfor %}
+            {% endfor %}
+        {% elseif range == '20'}
+            <h1>£20 - £50</h1>
+            {% for item in items %}
+                {% if item.price >= 20.00 and item.price <= 50.00 %}
+                    <img src = "{{ item.picture.url }}" alt = "{{ item.item_name }}" width="200px"\>
+                {% endif %}
+            {% endfor %}
+        {% elseif range == 50}
+            <h1>£50 - £100</h1>
+            {% for item in items %}
+                {% if item.price >= 50.00 and item.price <= 100.00 %}
+                    <img src = "{{ item.picture.url }}" alt = "{{ item.item_name }}" width="200px"\>
+                {% endif %}
+            {% endfor %}
+        {% elseif range == 100}
+            <h1>£100 - £500</h1>
+            {% for item in items %}
+                {% if item.price >= 100.00 and item.price <= 500.00 %}
+                    <img src = "{{ item.picture.url }}" alt = "{{ item.item_name }}" width="200px"\>
+                {% endif %}
+            {% endfor %}
+        {% elseif range == 500}
+            <h1>Over £500</h1>
+            {% for item in items %}
+                {% if item.price >= 500.00 %}
+                    <img src = "{{ item.picture.url }}" alt = "{{ item.item_name }}" width="200px"\>
+                {% endif %}
+            {% endfor %}
         {% else %}
-            <strong>There are no items currently in this price range.</strong>
+            <h1>Not a valid price range!</h1>
         {% endif %}
     {% else %}
         There are no items to show!

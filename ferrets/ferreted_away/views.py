@@ -182,10 +182,8 @@ def browsePrice(request):
     return render(request, 'ferrets/browsePrice.html')
 
 def priceRange(request, priceRange):
-    range = priceRange
-    range.split("-")
-    context_dict["max_val"] = Decimal(range[0])
-    context_dict["min_val"] = Decimal(range[1])
+    context_dict = {}
+    context_dict["range"] = priceRange
     context_dict["items"] = Item.objects.all()
     return render(request, 'ferrets/priceRange.html', context_dict)
 
