@@ -34,7 +34,7 @@ body {
 	background: #34abba;
 	font-size: 50px;
 	color: #fff;
-	height: 140px;
+	height: 130px;
 	padding: 10px;
 }
 
@@ -52,10 +52,6 @@ body {
 	color: #fff;
 	width:99%;
 	padding:10px;
-}
-
-b, strong {
-	color:#34abba;
 }
 
 #topbutton {
@@ -84,6 +80,18 @@ b, strong {
 	box-shadow: 0px 0px 7px #348993;
 }
 
+#accounticon {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	height: 100px;
+	width: 100px;
+}
+
+
+b, strong {
+	color:#34abba;
+}
 
 a.itemlink {
 	color: #121411;
@@ -145,6 +153,11 @@ cat {
 	border: 1px solid #fff;
 }
 
+a img {
+	margin-right: 15px;
+	margin-bottom: 15px;
+	border: 2px solid #999;
+}
 
 .cropandreduce{
 	object-fit: cover;

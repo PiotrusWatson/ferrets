@@ -132,8 +132,8 @@ def addItems(request, username):
                 item.user = request.user
 
 
-                if 'image' in request.FILES:
-                    item.picture = request.FILES['image']
+                if 'picture' in request.FILES:
+                    item.picture = request.FILES['picture']
 
                 item.save()
 
@@ -146,8 +146,12 @@ def addItems(request, username):
 
 @login_required
 def myWatchlist(request):
+<<<<<<< HEAD
+    watchlist = Watchlist.objects.filter(user=request.user).order_by("-date_added")[:5]
+=======
     watchlist = Item.objects.filter(item_name__in=Watchlist.objects.filter(user=request.user)).order_by(
         "-date_added")[:5]
+>>>>>>> be99add96d2aa23f7c1b108f9ad2d46f43012559
 
     context_dict = {"watchlist": watchlist,
                     }
@@ -223,10 +227,10 @@ def showItem(request, item_itemId):
 
                 logged_in = True
 
-                if request.user == item.user:
+                if request.user.username == item.user:
                     comments = Comments.objects.filter(item=item).order_by('date_added')
                 else:
-                    comments = Comments.objects.filter(item=item, user__in=[item.user, request.user]).order_by(
+                    comments = Comments.objects.filter(item=item, user__in=[item.user, request.user.username]).order_by(
                         'date_added')
 
             else:
@@ -251,12 +255,6 @@ def showItem(request, item_itemId):
         context_dict['comments'] = None
 
     return render(request, "ferrets/showitem.html", context_dict)
-
-def deleteItem(request, itemId):
-    context_dict = {}
-##    try:
-        
-##    except:
 
 
 @csrf_exempt
