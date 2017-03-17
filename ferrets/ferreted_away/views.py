@@ -245,6 +245,12 @@ def showItem(request, item_itemId):
 
     return render(request, "ferrets/showitem.html", context_dict)
 
+def deleteItem(request, itemId):
+    context_dict = {}
+    try:
+        
+    except:
+
 
 @csrf_exempt
 def send_message(request):
