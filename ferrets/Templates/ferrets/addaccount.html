@@ -6,12 +6,11 @@
 {% endblock %}
 
 {% block content %}
-	<h1>Log In</h1>
+	<h1>Register</h1>
 	{% if registered %}
 		Thanks for registering!
 		<a href="{% url 'home' %}">Return to the homepage.</a><br />
 	{% else %}
-		Register here!
 		<form id="user_form" method="post" action="{% url 'addAccount' %}" enctype="multipart/form-data">
 		
 		{% csrf_token %}
