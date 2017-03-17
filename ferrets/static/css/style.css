@@ -80,14 +80,30 @@ body {
 	box-shadow: 0px 0px 7px #348993;
 }
 
-#accounticon {
+/*#accounticon {
 	position: absolute;
 	top: 20px;
 	right: 20px;
 	height: 100px;
 	width: 100px;
+} */
+
+/*for use in individual item pages*/
+#itempic {
+	border: 2px solid #999;
 }
 
+#leftmost {
+	position: relative;
+	float: left;
+	margin-right: 20px;
+	width: 250px;
+}
+
+#rightmost {
+}
+
+/* end of item page stuff */
 
 b, strong {
 	color:#34abba;
@@ -158,6 +174,8 @@ a img {
 	margin-bottom: 15px;
 	border: 2px solid #999;
 }
+
+
 
 .cropandreduce{
 	object-fit: cover;
