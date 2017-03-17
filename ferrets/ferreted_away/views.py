@@ -254,9 +254,9 @@ def showItem(request, item_itemId):
 
 def deleteItem(request, itemId):
     context_dict = {}
-    try:
+##    try:
         
-    except:
+##    except:
 
 
 @csrf_exempt
