@@ -7,7 +7,7 @@ from ferreted_away.forms import UserForm, UserProfileForm, CommentForm, ItemForm
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from django.views.decorators.csrf import csrf_exempt
-from django.core.mail import send_mail
+from django.core.mail import send_mail, BadHeaderError
 from decimal import Decimal
 
 
@@ -338,8 +338,14 @@ def contactform (request):
         message = request.POST.get("message", None)
         email = request.POST.get("email", None)
         name = request.POST.get("name", None)
-        send_mail('FerretedAway Contact Form','Message: ' + message + "\nReply e-mail: " + email + "\nName: " + name,
-            'ferretedawayteam@gmail.com',['ferretedawayteam@gmail.com'],)
-        return HttpResponse("success")
+        if message and email and name:
+            try:
+                send_mail('FerretedAway Contact Form','Message: ' + message + "\nReply e-mail: " + email + "\nName: " + name,
+                    'ferretedawayteam@gmail.com',['ferretedawayteam@gmail.com'],)
+                return HttpResponse("success")
+            except BadHeaderError:
+                return HttpResponse("Invalid header found")
+        else:
+            return HttpResponse("Ensure you have filled in all fields")
     else:
         return HttpResponse("failure")
