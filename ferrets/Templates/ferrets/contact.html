@@ -10,31 +10,24 @@
 	<div class='message'></div>
 	<form id="contact" action="/contactform/">
         <h3>Please fill in the form below.</h3>
-        <div>
-                <label>
-                        <span>Name: </span>
-                        <input placeholder="Enter your name" type="text" id="name">
-                </label>
-        </div>
-        </br>
-        <div>
-                <label>
-                        <span>Email: </span>
-                        <input placeholder="Enter your email address" type="email" id="email">
-                </label>
-        </div>
-        </br>
-        <div>
-                <label>
-                        <span>Message: </span>
-                        <textarea placeholder="Type your message here" id="message"></textarea>
-                </label>
-        </div>
-        </br>
-        <div>
-                <button name="submit" type="button" id="submit">Send Email</button>
-        </div>
-</form>
+        <table>
+        	<tr>
+        		<td>Name: </td>
+        		<td><input placeholder="Enter your name" type="text" id="name"></td>
+        	</tr>
+        	<tr>
+        		<td>Email: </td>
+        		<td><input placeholder="Enter your email address" type="email" id="email"></td>
+        	</tr>
+        	<tr>
+        		<td>Message: </td>
+        		<td><textarea placeholder="Type your message here" id="message"></textarea></td>
+        	</tr>
+
+        </table>
+
+		<button name="submit" type="button" id="submit">Send Email</button>
+	</form>
 	<script src="https://code.jquery.com/jquery-3.1.1.js"></script>
 	<script src="../static/js/contact.js"></script>
 {% endblock %}
