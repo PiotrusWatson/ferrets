@@ -11,13 +11,14 @@
 	
 	{% if watchlist %}
 		{% for item in watchlist %}
-		<div class="items">
-				<a href="{% url 'showItem' item.itemId %}">
-					<img src = "{% if item.picture %}{{ item.picture.url }} {% else %} {% static 'images/placeholder.png' %} {% endif %}" alt = "{{ item.item_name }}" width="200px"\>
-				</a>
-				<p>
-				<a class="itemlink" href="{% url 'showItem' item.itemId %}">{{item.item_name}}</a> £{{ item.price}}
-				</p>
+		<div class = "items">
+			<a href="{% url 'showItem' item.itemId %}">
+				<img src = "{% if item.picture %}{{ item.picture.url }} {% else %}{% static 'images/placeholder.png' %} {% endif %}" alt = "{{ item.item_name }}" width="200px" height="200px"\>
+			</a>
+            <p>
+            <a class="itemlink" href="{% url 'showItem' item.itemId %}">{{item.item_name}}</a> £{{ item.price}}
+            </p>
+            </div>
 		<div>
 		{% endfor %}
     {% else %}

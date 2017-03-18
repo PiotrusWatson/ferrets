@@ -10,24 +10,18 @@
 	<h3>My Items</h3> 
 	<a class="itemlink" href="{% url 'addItems' user.username %}"><h4>Add new Item</h4></a>
 	{% if my_items %}
-	<table>
 		<tr>
 		{% for item in my_items %}
-				<a href="{% url 'showItem' item.itemId %}">
-					<img src = "{% if item.picture %}{{ item.picture.url }} {% else %} {% static 'images/placeholder.png' %} {% endif %}" alt = "{{ item.item_name }}" width="200px"\>
-				</a>
-				</br>
-
-
-
-				<a class="itemlink" href="{% url 'showItem' item.itemId %}">{{item.item_name}}</a>
-				</br>
-				<a class="itemlink" href="{% url 'deleteItem' item.itemId %}">Remove Item</a>
-			</td>
+			<div class = "items">
+			<a href="{% url 'showItem' item.itemId %}">
+				<img src = "{% if item.picture %}{{ item.picture.url }} {% else %}{% static 'images/placeholder.png' %} {% endif %}" alt = "{{ item.item_name }}" width="200px" height="200px"\>
+			</a>
+            <p>
+            	<a class="itemlink" href="{% url 'showItem' item.itemId %}">{{item.item_name}}</a></br>  
+            	<a class="itemlink" href="{% url 'deleteItem' item.itemId %}">Remove Item</a>
+            </p>
+            </div>
 		{% endfor %} 
-		</tr>
-	</table>
-
     {% else %}
         <h5>You haven't uploaded any items for sale!</h5>
     {% endif %}

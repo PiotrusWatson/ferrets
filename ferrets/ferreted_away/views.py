@@ -291,12 +291,12 @@ def deleteItem(request, item_itemid):
             if request.user == item.user:
                 item.delete()
 
-        return HttpResponseRedirect(reverse('myAccount'))
+        return HttpResponseRedirect(reverse('myItems'))
 
 
     except Item.DoesNotExist:
 
-        return HttpResponseRedirect(reverse('myAccount'))
+        return HttpResponseRedirect(reverse('myItems'))
 
 @login_required
 def addWatchlist(request, item_itemid):
