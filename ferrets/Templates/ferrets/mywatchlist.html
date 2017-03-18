@@ -18,8 +18,10 @@
             <p>
             <a class="itemlink" href="{% url 'showItem' item.itemId %}">{{item.item_name}}</a> £{{ item.price}}
             </p>
-            </div>
-		<div>
+            <p>
+            	<a href="{% url 'removeWatchlist' item.itemId %}" class="itemlink">Remove From Watchlist</a>
+            </p>
+		</div>
 		{% endfor %}
     {% else %}
         <h5>You don't have any items in your watchlist!</h5>
