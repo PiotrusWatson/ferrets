@@ -333,19 +333,13 @@ def removeWatchlist(request, item_itemid):
         return HttpResponseRedirect(reverse('myAccount'))
 
 @csrf_exempt
-def send_message(request):
+def contactform (request):
     if request.method == 'POST':
-        print(request.POST)
         message = request.POST.get("message", None)
         email = request.POST.get("email", None)
         name = request.POST.get("name", None)
-        send_mail(
-            'FerretedAway Contact Form',
-            'Message: ' + message + "\n\nReply e-mail: " + email,
-            'ferretedawayteam@gmail.com',
-            ['ferretedawayteam@gmail.com'],
-            fail_silently=True,
-        )
+        send_mail('FerretedAway Contact Form','Message: ' + message + "\nReply e-mail: " + email + "\nName: " + name,
+            'ferretedawayteam@gmail.com',['ferretedawayteam@gmail.com'],)
         return HttpResponse("success")
     else:
         return HttpResponse("failure")
