@@ -8,10 +8,10 @@
 {% block content %}
 	<h1>{{item.item_name}} - £{{item.price}}</h1>
 	<div id="leftmost">
-		<img src = "{% if item.picture %}{{ item.picture.url }} {% else %} {% static 'images/placeholder.png' %} {% endif %}" alt = "{{ item.item_name }}" width="240px" id="itempic"\>
+		<img src = "{{ item.picture.url }}" alt = "{{ item.item_name }}" width="240px" id="itempic"\>
 		<br />
 		<br />
-		<img src="{{sellUser.picture}}" width="80px" height="80px" alt="seller's icon">
+		<img src="{{ sellUser.picture }}" width="80px" height="80px" alt="seller's icon">
 		Sold by <b>{{ sellUser.user.username }}</b>
 		<p>
 		{% if seller %}
@@ -58,6 +58,7 @@
 			{{ commentForm.as_p }}
 		
 			<input type="submit" name="submit" value="Add Comment"/>
+			</form>
 		{% else %}
 		
 			Please log in to post comments to the seller.

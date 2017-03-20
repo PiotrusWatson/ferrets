@@ -12,7 +12,7 @@ from decimal import Decimal
 from django.contrib import messages
 
 def home(request):
-    item_list = Item.objects.order_by('-views')[:3]
+    item_list = Item.objects.order_by('-views')[:3] #3 of the most viewed items
 
     context_dict = {'items': item_list,
                     }
@@ -56,18 +56,21 @@ def user_login(request):
     context_dict = {}
 
     if request.method == 'POST':
+        #logging user in
         username = request.POST.get('username')
         password = request.POST.get('password')
 
         user = authenticate(username=username, password=password)
 
         if user:
+        #if the user's account works, take them home
             if user.is_active:
                 login(request, user)
                 return HttpResponseRedirect(reverse('home'))
+        #otherwise, take them to the tragic rejection page :(
             else:
-                return HttpResponse("Your Rango account is disabled")
-
+                return HttpResponse("Your account is disabled")
+        #if login fails, tell them that :(
         else:
             print("Invalid login details: {0}, {1}".format(username, password))
 
@@ -78,13 +81,15 @@ def user_login(request):
 
 
 def addAccount(request):
-    registered = False
+    registered = False #uses this in the template
 
     if request.method == 'POST':
+        #get image and details from forms
         user_form = UserForm(data=request.POST)
         profile_form = UserProfileForm(data=request.POST)
 
         if user_form.is_valid() and profile_form.is_valid():
+            #if both forms are good, save the data on them to a new instance of user model
             user = user_form.save()
 
             user.set_password(user.password)
@@ -92,6 +97,7 @@ def addAccount(request):
 
             profile = profile_form.save(commit=False)
             profile.user = user
+            #if an image is found in the great aether, saves it as the user's image
             if 'picture' in request.FILES:
                 profile.picture = request.FILES['picture']
 
@@ -114,6 +120,7 @@ def addAccount(request):
 
 @login_required
 def myAccount(request):
+    #shows last 5 items and watchlist items added
     my_items = Item.objects.filter(user=request.user).order_by("-date_added")[:5]
 
     item_ids = Watchlist.objects.filter(user=request.user).order_by("-date_added").values_list('item')
@@ -157,8 +164,8 @@ def addItems(request, username):
 
 @login_required
 def myWatchlist(request):
-
-    item_ids = Watchlist.objects.filter(user=request.user).order_by("-date_added").values_list('item')[:5]
+    #shows last
+    item_ids = Watchlist.objects.filter(user=request.user).order_by("-date_added").values_list('item')
 
     my_watchlist = Item.objects.filter(itemId__in = item_ids)
 
@@ -214,9 +221,10 @@ def priceRange(request, priceRange):
 def showItem(request, item_itemId):
     context_dict = {}
 
+    #if an item with specified id does exist
     try:
         item = Item.objects.get(itemId=item_itemId)
-
+        #handling comment posting
         if request.method == 'POST':
             commentForm = CommentForm(data=request.POST)
 
@@ -229,16 +237,16 @@ def showItem(request, item_itemId):
 
             else:
                 print(commentForm.errors)
-
+        #assume we are not seller
         context_dict['seller'] = False
         commentForm = CommentForm()
 
         item.views = item.views + 1
-
+        #if logged in, modify comments based on specific things
         if request.user.is_authenticated:
 
             logged_in = True
-
+            #comments 
             if request.user == item.user:
                 context_dict['seller'] = True
                 comments = Comments.objects.filter(item=item).order_by('date_added')
