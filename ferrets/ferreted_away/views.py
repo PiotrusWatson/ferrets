@@ -323,7 +323,7 @@ def removeWatchlist(request, item_itemid):
             if watchlist:
                 watchlist.delete()
 
-        return HttpResponseRedirect(reverse('showItem', args=(item_itemid,)))
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', reverse('showItem', args=(item_itemid,))))
 
     except Item.DoesNotExist:
         return HttpResponseRedirect(reverse('myAccount'))
