@@ -11,7 +11,7 @@ class ItemForm(forms.ModelForm):
     description = forms.CharField(max_length=350,
                                   help_text="Please insert a Description")
     views = forms.IntegerField(widget=forms.HiddenInput(), initial=0, required=False)
-    picture = forms.ImageField()
+    picture = forms.ImageField
     
 
 

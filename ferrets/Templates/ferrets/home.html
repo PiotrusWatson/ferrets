@@ -31,7 +31,7 @@ On Ferreted Away you can buy and sell anything, and it's completely free to join
 	{% if watched %}
 		{% for item in watched %}
 		<a href="{% url 'showItem' item.itemId %}">
-				<img class="cropandreduce" src = "{% if item.picture %}{{ item.picture.url }} {% else %}{% static 'images/placeholder.png' %} {% endif %}" alt = "{{ item.item_name }}" width="200px" height="200px"\>
+				<img class="cropandreduce" src = "{{ item.picture.url }}" alt = "{{ item.item_name }}" width="200px" height="200px"\>
 		</a>
 		{% endfor %}
 	</div>
