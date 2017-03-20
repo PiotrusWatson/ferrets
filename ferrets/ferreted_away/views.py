@@ -139,10 +139,6 @@ def addItems(request, username):
                 item = form.save(commit=False)
                 item.user = request.user
 
-
-                if 'picture' in request.FILES:
-                    item.picture = form.cleaned_data[]
-
                 item.save()
 
                 return HttpResponseRedirect(reverse('myItems'))
