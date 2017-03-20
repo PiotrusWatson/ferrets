@@ -7,25 +7,30 @@ from ferreted_away.forms import UserForm, UserProfileForm, CommentForm, ItemForm
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from django.views.decorators.csrf import csrf_exempt
-from django.core.mail import send_mail
+from django.core.mail import send_mail, BadHeaderError
 from decimal import Decimal
 
 
 def home(request):
-    item_list = Item.objects.order_by('-views')[:3]
+    item_list = Item.objects.order_by('-views')[:5]
 
     context_dict = {'items': item_list,
                     }
 
     if request.user.is_authenticated():
-        watched_list = Watchlist.objects.filter(user=request.user)
-        watched_list = watched_list.order_by("-date_added")[:3]
+        item_ids = Watchlist.objects.filter(user=request.user).order_by("-date_added").values_list('item')
+        watched_list = Item.objects.filter(itemId__in=item_ids)[:5]
         context_dict = {'items': item_list,
                         'watched': watched_list,
                         }
 
     return render(request, 'ferrets/home.html', context=context_dict)
 
+def searchresults(request):
+    return render(request, 'ferrets/searchresults.html')
+
+def verify(request):
+    return render(request, 'ferrets/google695f0a9a1e7dc6ba.html')
 
 def about(request):
     return render(request, 'ferrets/about.html')
@@ -286,12 +291,12 @@ def deleteItem(request, item_itemid):
             if request.user == item.user:
                 item.delete()
 
-        return HttpResponseRedirect(reverse('myAccount'))
+        return HttpResponseRedirect(reverse('myItems'))
 
 
     except Item.DoesNotExist:
 
-        return HttpResponseRedirect(reverse('myAccount'))
+        return HttpResponseRedirect(reverse('myItems'))
 
 @login_required
 def addWatchlist(request, item_itemid):
@@ -328,19 +333,19 @@ def removeWatchlist(request, item_itemid):
         return HttpResponseRedirect(reverse('myAccount'))
 
 @csrf_exempt
-def send_message(request):
+def contactform (request):
     if request.method == 'POST':
-        print(request.POST)
         message = request.POST.get("message", None)
         email = request.POST.get("email", None)
         name = request.POST.get("name", None)
-        send_mail(
-            'FerretedAway Contact Form',
-            'Message: ' + message + "\n\nReply e-mail: " + email,
-            'ferretedawayteam@gmail.com',
-            ['ferretedawayteam@gmail.com'],
-            fail_silently=True,
-        )
-        return HttpResponse("success")
+        if message and email and name:
+            try:
+                send_mail('FerretedAway Contact Form','Message: ' + message + "\nReply e-mail: " + email + "\nName: " + name,
+                    'ferretedawayteam@gmail.com',['ferretedawayteam@gmail.com'],)
+                return HttpResponse("success")
+            except BadHeaderError:
+                return HttpResponse("Invalid header found")
+        else:
+            return HttpResponse("Ensure you have filled in all fields")
     else:
         return HttpResponse("failure")

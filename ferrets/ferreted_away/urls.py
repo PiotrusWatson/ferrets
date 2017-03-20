@@ -15,7 +15,7 @@ urlpatterns = [
     url(r'myaccount/(?P<username>[\w\-]+)/addItems/$', views.addItems, name='addItems'),
     url(r'myaccount/mywatchlist/$', views.myWatchlist, name='myWatchlist'),
     url(r'categories/$', views.categories, name='categories'),
-	url(r'send_mail/$', views.send_message, name='sendMessage'),
+	url(r'contactform/$', views.contactform, name='contactform'),
     url(r'^category/(?P<category_name_slug>[\w\-]+)/$', views.showCategory, name='showCategory'),
 	url(r'^item/(?P<item_itemId>[\w\-]+)/$', views.showItem, name='showItem'),
     url(r'^browsebyprice/pricerange/(?P<priceRange>[\w\-]+)/$', views.priceRange, name='priceRange'),
@@ -23,4 +23,6 @@ urlpatterns = [
     url(r'^myaccount/myitems/(?P<item_itemid>[\w\-]+)/delete/$', views.deleteItem, name='deleteItem'),
     url(r'^myaccount/(?P<item_itemid>[\w\-]+)/addWatchlist/$', views.addWatchlist, name='addWatchlist'),
     url(r'^myaccount/(?P<item_itemid>[\w\-]+)/removeWatchlist/$', views.removeWatchlist, name='removeWatchlist'),
+    url(r'^searchresults/$', views.searchresults, name='searchresults'),
+    url(r'^google695f0a9a1e7dc6ba.html/$', views.verify, name='verify'),
 ]

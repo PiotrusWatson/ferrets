@@ -8,26 +8,26 @@
 {% block content %}
 	<h1>Contact Us</h1>
 	<div class='message'></div>
-	<form id="contact-us" action="/send_mail/">
-	    <div class="field">
-	        <label for="name">Name:</label>
-	        <input type="text" id="name" name="name" required>
-	    </div>
-		</br>
-	    <div class="field">
-	        <label for="email">Email:</label>
-	        <input type="email" id="email" name="email" required>
-	    </div>
-		</br>
-	    <div class="field">
-	        <label for="message">Message:</label>
-	        <textarea id="message" name="message" required></textarea>
-	    </div>
-		</br>
-	    <div class="field">
-	        <button id="sendButton" type="button">Send</button>
-	    </div>
+	<form id="contact" action="/contactform/">
+        <h3>Please fill in the form below.</h3>
+        <table>
+        	<tr>
+        		<td>Name: </td>
+        		<td><input placeholder="Enter your name" type="text" id="name"></td>
+        	</tr>
+        	<tr>
+        		<td>Email: </td>
+        		<td><input placeholder="Enter your email address" type="email" id="email"></td>
+        	</tr>
+        	<tr>
+        		<td>Message: </td>
+        		<td><textarea placeholder="Type your message here" id="message"></textarea></td>
+        	</tr>
+
+        </table>
+
+		<button name="submit" type="button" id="submit">Send Email</button>
 	</form>
 	<script src="https://code.jquery.com/jquery-3.1.1.js"></script>
-	<script src="../static/js/contactform.js"></script>
+	<script src="../static/js/contact.js"></script>
 {% endblock %}

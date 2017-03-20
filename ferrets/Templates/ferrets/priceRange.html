@@ -9,47 +9,72 @@
         {% if range == '0' %}
             <h1>Under £20</h1>
             {% for item in items %}
+                <div class="items">
                 {% if item.price <= 20.00 %}
 					<a href="{% url 'showItem' item.itemId %}">
                     <img src = "{% if item.picture %}{{ item.picture.url }} {% else %}{% static 'images/placeholder.png' %} {% endif %}" alt = "{{ item.item_name }}" width="200px" height="200px"\>
 					</a>
+                    <p>
+                    <a class="itemlink" href="{% url 'showItem' item.itemId %}">{{item.item_name}}</a> £{{ item.price}}
+                    </p>
 				{% endif %}
+                </div>
             {% endfor %}
         {% elif range == '20' %}
             <h1>£20 - £50</h1>
             {% for item in items %}
+                <div class="items">
                 {% if item.price >= 20.00 and item.price <= 50.00 %}
 				<a href="{% url 'showItem' item.itemId %}">
                     <img src = "{% if item.picture %}{{ item.picture.url }} {% else %} {% static 'images/placeholder.png' %} {% endif %}" alt = "{{ item.item_name }}" width="200px" height="200px" class="itempic"\>
                 </a>
+                <p>
+                <a class="itemlink" href="{% url 'showItem' item.itemId %}">{{item.item_name}}</a> £{{ item.price}}
+                </p>
 				{% endif %}
+                </div>
             {% endfor %}
         {% elif range == '50' %}
             <h1>£50 - £100</h1>
             {% for item in items %}
+                <div class="items">
                 {% if item.price >= 50.00 and item.price <= 100.00 %}
 				<a href="{% url 'showItem' item.itemId %}">
                     <img src = "{% if item.picture %}{{ item.picture.url }} {% else %} {% static 'images/placeholder.png' %} {% endif %}" alt = "{{ item.item_name }}" width="200px" height="200px" class="itempic"\>
                 </a>
+                <p>
+                <a class="itemlink" href="{% url 'showItem' item.itemId %}">{{item.item_name}}</a> £{{ item.price}}
+                </p>
 				{% endif %}
+                </div>
             {% endfor %}
         {% elif range == '100' %}
             <h1>£100 - £500</h1>
             {% for item in items %}
+                <div class="items">
                 {% if item.price >= 100.00 and item.price <= 500.00 %}
 				<a href="{% url 'showItem' item.itemId %}">
                     <img src = "{% if item.picture %}{{ item.picture.url }} {% else %} {% static 'images/placeholder.png' %} {% endif %}" alt = "{{ item.item_name }}" width="200px" height="200px" class="itempic"\>
                 </a>
+                <p>
+                <a class="itemlink" href="{% url 'showItem' item.itemId %}">{{item.item_name}}</a> £{{ item.price}}
+                </p>
 				{% endif %}
+                </div>
             {% endfor %}
         {% elif range == '500' %}
             <h1>Over £500</h1>
             {% for item in items %}
+                <div class="items">
                 {% if item.price >= 500.00 %}
 				<a href="{% url 'showItem' item.itemId %}">
                     <img src = "{% if item.picture %}{{ item.picture.url }} {% else %} {% static 'images/placeholder.png' %} {% endif %}" alt = "{{ item.item_name }}" width="200px" height="200px" class="itempic"\>
                 </a>
+                <p>
+                <a class="itemlink" href="{% url 'showItem' item.itemId %}">{{item.item_name}}</a> £{{ item.price}}
+                </p>
 				{% endif %}
+                </div>
             {% endfor %}
         {% else %}
             Not a valid price range.

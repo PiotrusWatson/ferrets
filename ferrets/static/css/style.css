@@ -210,6 +210,10 @@ a img {
 	border: 2px solid #999;
 }
 
+.items {
+	position: relative;
+	float: left;
+}
 
 .cropandreduce{
 	object-fit: cover;

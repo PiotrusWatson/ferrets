@@ -10,19 +10,19 @@
 	<h3>My Watchlist</h3> 
 	
 	{% if watchlist %}
-	<table>
-		<tr>
 		{% for item in watchlist %}
-			<td>
-				<a href="{% url 'showItem' item.itemId %}">
-					<img src = "{% if item.picture %}{{ item.picture.url }} {% else %} {% static 'images/placeholder.png' %} {% endif %}" alt = "{{ item.item_name }}" width="200px"\>
-				</a>
-				</br>
-				<a class="itemlink" href="{% url 'showItem' item.itemId %}">{{item.item_name}}</a>
-			</td>
+		<div class = "items">
+			<a href="{% url 'showItem' item.itemId %}">
+				<img src = "{% if item.picture %}{{ item.picture.url }} {% else %}{% static 'images/placeholder.png' %} {% endif %}" alt = "{{ item.item_name }}" width="200px" height="200px"\>
+			</a>
+            <p>
+            <a class="itemlink" href="{% url 'showItem' item.itemId %}">{{item.item_name}}</a> £{{ item.price}}
+            </p>
+            <p>
+            	<a href="{% url 'removeWatchlist' item.itemId %}" class="itemlink">Remove From Watchlist</a>
+            </p>
+		</div>
 		{% endfor %}
-		</tr>
-	</table>
     {% else %}
         <h5>You don't have any items in your watchlist!</h5>
     {% endif %}
