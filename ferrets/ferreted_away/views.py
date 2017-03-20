@@ -9,17 +9,21 @@ from datetime import datetime
 from django.views.decorators.csrf import csrf_exempt
 from django.core.mail import send_mail, BadHeaderError
 from decimal import Decimal
-
+from django.contrib import messages
 
 def home(request):
-    item_list = Item.objects.order_by('-views')[:5]
+    item_list = Item.objects.order_by('-views')[:3]
 
     context_dict = {'items': item_list,
                     }
-
+    #if user is logged in, show watchlist
     if request.user.is_authenticated():
+
+        #get all item ids from the watchlist linked to the user and ordered by most recently added
         item_ids = Watchlist.objects.filter(user=request.user).order_by("-date_added").values_list('item')
-        watched_list = Item.objects.filter(itemId__in=item_ids)[:5]
+        #use this to get the last 3 items added to the watchlist
+        watched_list = Item.objects.filter(itemId__in=item_ids)[:3]
+        #add watchlist to the context dict
         context_dict = {'items': item_list,
                         'watched': watched_list,
                         }

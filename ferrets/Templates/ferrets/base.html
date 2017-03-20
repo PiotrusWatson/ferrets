@@ -11,6 +11,7 @@
 	</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 	<meta name="google-site-verification" content="TM0Yoi_oYX7ZiuK0EGKnWhyOfMt7Dmq08im661S8nRo" />
+	<script src="../static/js/search.js"></script>
 </head>
 <body>
 	<div id="header">
@@ -19,8 +20,12 @@
 			<img class="logo" src="{% static 'images/FerretedAwayLogo.png' %}" alt="logo" height="130px"/>
 			</a>
 		</div> 
-		<div class="headerText">erreted Away</div>		
-		<div id="searchbar"><gcse:searchbox-only resultsUrl="{% url 'searchresults' %}"></gcse:searchbox-only></div>
+		<div class="headerText">erreted Away</div>
+		
+		
+		<div id="searchbar">
+		<gcse:searchbox-only resultsUrl="{% url 'searchresults' %}"></gcse:searchbox-only>
+		</div>
 		
 			{% if user.is_authenticated %}
 			<div id="topbutton">
@@ -71,7 +76,6 @@
 		</div>
 		
 	</div>
-	<script src="../static/js/search.js"></script>
 </body>
 </html>
 	

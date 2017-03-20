@@ -42,3 +42,4 @@ class CommentForm(forms.ModelForm):
         model = Comments
         exclude = ('user','item',)
         fields = ('comment',)
+
