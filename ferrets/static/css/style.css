@@ -90,6 +90,14 @@ body {
 	border-radius: 3px;
 }
 
+#search {
+	position: absolute !important;
+	top: 50px;
+	width: 80%;
+	left: 170px;
+	height: 80%;
+}
+
 
 
 /*#accounticon {
