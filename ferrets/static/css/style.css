@@ -237,3 +237,8 @@ small,sup,sub {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+li {
+	color: #fff;
+	margin-left:3px;
+}
