@@ -14,10 +14,14 @@
 			<a href="{% url 'showItem' item.itemId %}">
 				<img src = "{{ item.picture.url }}" alt = "{{ item.item_name }}" width="200px" height="200px"\>
 			</a>
-            <p>
-            <a class="itemlink" href="{% url 'showItem' item.itemId %}">{{item.item_name}}</a> £{{ item.price}}
-            </p>
+            <br />
+            <span style="display:block;text-overflow: ellipsis;width: 200px;overflow: hidden; white-space: nowrap;">
+			<a class="itemlink" href="{% url 'showItem' item.itemId %}">{{item.item_name}}</a> £{{ item.price}}
+            <br />
+			<br />
+			</span>
             </div>
+			
 			{% endfor %}
         
         {% else %}

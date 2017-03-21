@@ -214,7 +214,6 @@ cat {
 
 a img {
 	margin-right: 15px;
-	margin-bottom: 15px;
 	border: 2px solid #999;
 }
 
@@ -231,6 +230,12 @@ a img {
 
 .logo {
 	border: 0px solid #34abba;
+}
+
+.overflow {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 small,sup,sub {
