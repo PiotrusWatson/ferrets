@@ -343,20 +343,3 @@ def removeWatchlist(request, item_itemid):
     except Item.DoesNotExist:
         return HttpResponseRedirect(reverse('myAccount'))
 
-@csrf_exempt
-def contactform (request):
-    if request.method == 'POST':
-        message = request.POST.get("message", None)
-        email = request.POST.get("email", None)
-        name = request.POST.get("name", None)
-        if message and email and name:
-            try:
-                send_mail('FerretedAway Contact Form','Message: ' + message + "\nReply e-mail: " + email + "\nName: " + name,
-                    'ferretedawayteam@gmail.com',['ferretedawayteam@gmail.com'],)
-                return HttpResponse("success")
-            except BadHeaderError:
-                return HttpResponse("Invalid header found")
-        else:
-            return HttpResponse("Ensure you have filled in all fields")
-    else:
-        return HttpResponse("failure")

@@ -9,9 +9,13 @@
 	{% block title_block %}	
 	{% endblock %}
 	</title>
+	
+	
 	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 	<meta name="google-site-verification" content="TM0Yoi_oYX7ZiuK0EGKnWhyOfMt7Dmq08im661S8nRo" />
-	<script src="../static/js/search.js"></script>
+	<script src="/static/js/search.js"></script>
+	
+	
 </head>
 <body>
 	<div id="header">
@@ -70,9 +74,7 @@
 			<a href="{% url 'contact' %}">Contact</a> | 
 			<a href="{% url 'sitemap' %}">Site Map </a> | 
 			<a href="{% url 'faq' %}">FAQ</a>
-		</div>
-		<div id="infobar">
-			This website uses cookies, by continuing to use this website you consent to cookies being used
+			<br /><small>This website uses cookies, by continuing to use this website you consent to cookies being used.</small>
 		</div>
 		
 	</div>

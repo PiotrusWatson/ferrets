@@ -141,10 +141,3 @@ MEDIA_ROOT = MEDIA_DIR
 
 #LOGIN STUFF
 LOGIN_URL = '/rango/login/'
-
-
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'ferretedawayteam@gmail.com'
-EMAIL_HOST_PASSWORD = 'ferretedaway17'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True

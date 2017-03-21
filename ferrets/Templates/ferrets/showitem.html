@@ -11,7 +11,7 @@
 		<img src = "{{ item.picture.url }}" alt = "{{ item.item_name }}" width="240px" id="itempic"\>
 		<br />
 		<br />
-		<img src="{{ sellUser.picture }}" width="80px" height="80px" alt="seller's icon">
+		<img src="{{ sellUser.picture.url }}" width="80px" height="80px" alt="seller's icon">
 		Sold by <b>{{ sellUser.user.username }}</b>
 		<p>
 		{% if seller %}
