@@ -51,6 +51,7 @@
 	</div>
 	<div id="contentwrapper">
 		<div id="sidebar">
+		<div id="sidecontent">
 			<a href="{% url 'home' %}">Home</a>
 			<hr>
 			{% if user.is_authenticated %}
@@ -62,6 +63,7 @@
 				{% get_category_list categories %}
 			<hr>
 				<a href="{% url 'browsePrice' %}">Browse by Price</a>
+		</div>
 		</div>
 		
 		<div id="content">

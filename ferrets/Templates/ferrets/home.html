@@ -6,14 +6,12 @@
 {% endblock %}
 	
 {% block content %}
-<div id="content">
 	<h1>Welcome to Ferreted Away 
 	{% if user.is_authenticated %}
 		<i>{{ user.username }}</i>
 	{% endif %}!</h1>
 <p>Ferreted Away is a site made for student, by students. It's like StudentVoice meets GumTree, but better.
 On Ferreted Away you can buy and sell anything, and it's completely free to join.
-</div>
 
 <div id = "items">
 	<h2> CURRENT TRENDING ITEMS </h2>
