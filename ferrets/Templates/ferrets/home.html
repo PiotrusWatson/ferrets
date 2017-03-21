@@ -22,20 +22,18 @@ On Ferreted Away you can buy and sell anything, and it's completely free to join
 		{% endfor %}
 </div>
 
-
+<div id = "items">
 {% if user.is_authenticated %}
 	<h2> YOUR WATCHLIST </h2>
-	<div id = "watchlist">
 	{% if watched %}
 		{% for item in watched %}
 		<a href="{% url 'showItem' item.itemId %}">
 				<img class="cropandreduce" src = "{{ item.picture.url }}" alt = "{{ item.item_name }}" width="200px" height="200px"\>
 		</a>
 		{% endfor %}
-	</div>
 	{% else %}
 	<p>You don't have any items in your watchlist.
 	{% endif %}
-	
+</div>
 {% endif %}
 {% endblock %}
