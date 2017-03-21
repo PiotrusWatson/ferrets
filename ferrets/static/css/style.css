@@ -33,7 +33,7 @@ body {
 }
 #sidecontent{
 	position: relative;
-	margin-top: 100%;
+	margin-top: 90%;
 	margin-left:1%;
 	
 }
@@ -111,14 +111,14 @@ body {
 	position: fixed;
 	clear: both;
 	text-align: center;
-	bottom: 0px;
+	bottom: 0%;
 	background: #34abba;
 	color: #fff;
 	width:100%;
 	height: 5%;
-	padding:7px;
-	margin-top:20%;
-	margin-bottom:0;
+	padding:0.2%;
+	margin-top:10%;
+	margin-bottom:0%;
 }
 
 /* start of item page specific css */
@@ -238,6 +238,8 @@ small,sup,sub {
 .items {
 	position: relative;
 	float: left;
+	padding-bottom: 2.5%;
+	padding-right: 1%;
 }
 
 .cropandreduce{
