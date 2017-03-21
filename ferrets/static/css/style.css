@@ -14,16 +14,21 @@ body {
 	width: 100%;
 	size:11px !important;
 	color:#444 !important;
+	margin-left: 200px;
+	margin-top: 200px;
+	position: relative;
 } 
 /* end of content-specific css */
 
 /* sidebar-specific css */
 #sidebar {
+	position: fixed;
 	width: 165px;
 	height: 100% !important;
 	background: #9bd9e0;
 	margin-right: 20px;
 	float:left;
+	z-index: 2;
 }
 
 #sideBarCat {
@@ -39,6 +44,8 @@ body {
 	color: #fff;
 	height: 130px;
 	padding: 10px;
+	position: fixed;
+	z-index: 3;
 }
 
 #logo{
