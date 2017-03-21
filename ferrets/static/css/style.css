@@ -51,7 +51,7 @@ body {
 	background: #34abba;
 	color: #fff;
 	width:99%;
-	padding:10px;
+	padding:7px;
 }
 
 #topbutton {
@@ -232,3 +232,6 @@ a img {
 .logo {
 	border: 0px solid #34abba;
 }
+
+small,sup,sub {
+    font-size:11px}
