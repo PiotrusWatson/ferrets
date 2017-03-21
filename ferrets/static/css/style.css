@@ -3,7 +3,7 @@ body {
 	positon:relative;
 	font-family: Calibri;
 }
-
+/* content-specific css */
 #contentwrapper {
 	position:absolute;
 	width:100%;
@@ -15,7 +15,9 @@ body {
 	size:11px !important;
 	color:#444 !important;
 } 
+/* end of content-specific css */
 
+/* sidebar-specific css */
 #sidebar {
 	width: 165px;
 	height: 100% !important;
@@ -27,8 +29,9 @@ body {
 #sideBarCat {
 	padding-left: 19px;
 }
+/* end of sidebar-specific css */
 
-
+/* header-specific css */
 #header {
 	width: 100%;
 	background: #34abba;
@@ -41,17 +44,6 @@ body {
 #logo{
 	position: relative;
 	float: left;
-}
-
-#infobar {
-	position: relative;
-	clear: both;
-	text-align: center;
-	bottom: 5px;
-	background: #34abba;
-	color: #fff;
-	width:99%;
-	padding:7px;
 }
 
 #topbutton {
@@ -82,35 +74,35 @@ body {
 
 #searchbar {
 	position: absolute;
-	width: 200px;
+	width: 300px;
 	height: 30px;
 	background-color: #fff;
 	top: 110px;
-	right: 20px;
+	right: 10px;
 	border-radius: 3px;
 }
+/* end of header-specific css */
 
-#search {
+
+#searchresults {
 	position: absolute !important;
 	top: 50px;
 	width: 80%;
 	left: 170px;
 	height: 80%;
 }
+#infobar {
+	position: relative;
+	clear: both;
+	text-align: center;
+	bottom: 5px;
+	background: #34abba;
+	color: #fff;
+	width:99%;
+	padding:7px;
+}
 
-
-
-/*#accounticon {
-	position: absolute;
-	top: 20px;
-	right: 20px;
-	height: 100px;
-	width: 100px;
-} */
-
-/*for use in individual item pages*/
-
-
+/* start of item page specific css */
 #itempic {
 	border: 2px solid #999;
 }
@@ -144,9 +136,19 @@ body {
 	text-align: center;
 	box-shadow: 0px 0px 7px #348993;
 }
+/* end of item page specific css */
 
+/* class css */
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #34abba;
+	box-shadow: 0px 2px 
+    margin: 1em 0;
+    padding: 0; 
+}
 
-/* end of item page stuff */
 
 b, strong {
 	color:#34abba;
@@ -168,14 +170,11 @@ h2 {
 	size: 14px;
 	color: #34abba;
 	text-transform: small caps;
-
 }
-
 a h2 {
 	color: #226d77;
 	text-decoration: underline !important;
-	}
-
+}
 a h2:hover {
 	color: #9bd9e0;
 }
@@ -184,15 +183,12 @@ h3 {
 	size: 12px;
 	color: #34abba;
 	text-transform: small caps;
-
 }
-
 h3 a {
 	color: #226d77;
 	text-decoration: underline !important;
 	font-weight: normal;
-	}
-
+}
 h3 a:hover {
 	color: #9bd9e0;
 }
@@ -202,7 +198,6 @@ a {
 	margin-bottom:2px;
 	letter-spacing: 0.5px;
 }
-
 a:hover {
 	color: #226d77;
 }
@@ -217,6 +212,11 @@ a img {
 	border: 2px solid #999;
 }
 
+small,sup,sub {
+    font-size:11px}
+	
+	
+	
 .items {
 	position: relative;
 	float: left;
@@ -237,6 +237,3 @@ a img {
     overflow: hidden;
     text-overflow: ellipsis;
 }
-
-small,sup,sub {
-    font-size:11px}
