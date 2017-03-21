@@ -246,7 +246,7 @@ def showItem(request, item_itemId):
         if request.user.is_authenticated:
 
             logged_in = True
-            #comments 
+            #comments
             if request.user == item.user:
                 context_dict['seller'] = True
                 comments = Comments.objects.filter(item=item).order_by('date_added')
