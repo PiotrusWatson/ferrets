@@ -4,7 +4,6 @@ from ferreted_away.models import Category, Item, UserProfile, Comments
 import datetime
 
 class ItemForm(forms.ModelForm):
-
     item_name = forms.CharField(max_length=128,
                            help_text="Please insert the item name.")
     price = forms.DecimalField(initial=0)

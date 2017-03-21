@@ -164,7 +164,7 @@ def addItems(request, username):
 
 @login_required
 def myWatchlist(request):
-    #shows last
+    #shows last watchlist items added
     item_ids = Watchlist.objects.filter(user=request.user).order_by("-date_added").values_list('item')
 
     my_watchlist = Item.objects.filter(itemId__in = item_ids)
@@ -246,7 +246,7 @@ def showItem(request, item_itemId):
         if request.user.is_authenticated:
 
             logged_in = True
-            #comments
+            #displaying comments
             if request.user == item.user:
                 context_dict['seller'] = True
                 comments = Comments.objects.filter(item=item).order_by('date_added')
@@ -272,6 +272,8 @@ def showItem(request, item_itemId):
         context_dict['commentForm'] = commentForm
 
         context_dict['inWatchlist'] = False
+
+        #try getting current item from watchlist, set bool to true if it finds it
         if request.user.is_authenticated:
             try:
                 Watchlist.objects.filter(user=request.user).get(item=item_itemId)
@@ -280,7 +282,7 @@ def showItem(request, item_itemId):
                 context_dict['inWatchlist'] = False
 
 
-
+    #if item with specified id does not exist, don't fill out anything in the context dict
     except Item.DoesNotExist:
 
         context_dict['item'] = None
@@ -292,13 +294,11 @@ def showItem(request, item_itemId):
 @login_required
 def deleteItem(request, item_itemid):
     try:
-
-
-
+        #get item with specified id
         item = Item.objects.get(itemId=item_itemid)
 
         if request.user.is_authenticated:
-
+            #if user's logged in and it's their item, delete it
             if request.user == item.user:
                 item.delete()
 
@@ -313,31 +313,32 @@ def deleteItem(request, item_itemid):
 def addWatchlist(request, item_itemid):
     try:
 
-        item = Item.objects.get(itemId=item_itemid)
+        item = Item.objects.get(itemId=item_itemid) #look for item
 
-        if request.user.is_authenticated:
+        if request.user.is_authenticated: #if user's logged in, add item to watchlist
             w = Watchlist(item=item_itemid, user=request.user)
             w.save()
 
         return HttpResponseRedirect(reverse('showItem',args=(item_itemid,)))
 
-    except Item.DoesNotExist:
+    except Item.DoesNotExist: #if item's not, get outta there :)
 
         return HttpResponseRedirect(reverse('myAccount'))
 
 
 @login_required
 def removeWatchlist(request, item_itemid):
-    try:
+    try: #if an item is found
 
         item = Item.objects.get(itemId=item_itemid)
 
-        if request.user.is_authenticated:
+        if request.user.is_authenticated: #if user's logged in, get the specified item in watchlist
             watchlist = Watchlist.objects.filter(user=request.user).get(item=item_itemid)
 
-            if watchlist:
+            if watchlist: #if it finds it, delete
                 watchlist.delete()
 
+        #redirect to the item's page
         return HttpResponseRedirect(request.META.get('HTTP_REFERER', reverse('showItem', args=(item_itemid,))))
 
     except Item.DoesNotExist:
