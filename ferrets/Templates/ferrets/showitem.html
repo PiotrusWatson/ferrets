@@ -8,7 +8,7 @@
 {% block content %}
 	<h1>{{item.item_name}} - £{{item.price}}</h1>
 	<div id="leftmost">
-		<img src = "{{ item.picture.url }}" alt = "{{ item.item_name }}" width="240px" id="itempic"\>
+		<img id="zoom" src = "{{ item.picture.url }}" alt = "{{ item.item_name }}" width="240px" id="itempic"\>
 		<br />
 		<br />
 		<img src="{{ sellUser.picture.url }}" width="80px" height="80px" alt="seller's icon">
@@ -66,6 +66,5 @@
 		{% endif %}
 		</tr>
 		
-	</div>
-	
+	</div>	
 {% endblock %}

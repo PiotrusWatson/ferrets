@@ -10,6 +10,10 @@ body {
 	height:100%;
 }
 
+#zoom{
+	/* used by jquery for zoom purposes */
+}
+
 #content {
 	width: 100%;
 	size:11px !important;
