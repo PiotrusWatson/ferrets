@@ -12,7 +12,7 @@ from decimal import Decimal
 from django.contrib import messages
 
 def home(request):
-    item_list = Item.objects.order_by('-views')[:3] #3 of the most viewed items
+    item_list = Item.objects.order_by('-views')[:5] #3 of the most viewed items
 
     context_dict = {'items': item_list,
                     }
@@ -22,10 +22,10 @@ def home(request):
         #get all item ids from the watchlist linked to the user and ordered by most recently added
         item_ids = Watchlist.objects.filter(user=request.user).order_by("-date_added").values_list('item')
         #use this to get the last 3 items added to the watchlist
-        watched_list = Item.objects.filter(itemId__in=item_ids)[:3]
+        watched_list = Item.objects.filter(itemId__in=item_ids)[:5]
         #add watchlist to the context dict
         context_dict = {'items': item_list,
-                        'watched': watched_list,
+                        'watchlist': watched_list,
                         }
 
     return render(request, 'ferrets/home.html', context=context_dict)
