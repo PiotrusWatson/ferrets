@@ -242,7 +242,7 @@ def showItem(request, item_itemId):
         commentForm = CommentForm()
 
         item.views = item.views + 1
-		item.save()
+        item.save()
         #if logged in, modify comments based on specific things
         if request.user.is_authenticated:
 
