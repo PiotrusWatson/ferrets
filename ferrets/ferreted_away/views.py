@@ -241,8 +241,8 @@ def showItem(request, item_itemId):
         context_dict['seller'] = False
         commentForm = CommentForm()
 
-        views = item.views + 1
-        item.save()
+        item.views = item.views + 1
+        item.save(['views'])
         #if logged in, modify comments based on specific things
         if request.user.is_authenticated:
 

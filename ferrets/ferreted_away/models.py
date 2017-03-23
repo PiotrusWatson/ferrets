@@ -32,11 +32,10 @@ class Item(models.Model):
     date_added = models.DateTimeField(auto_now=False, auto_now_add=True)
 
     def save(self, *args, **kwargs):
-        if not self.itemID:
-            try:
-                self.itemId = random.randint(0,1000000)
-            except:
-                save(self, *args, **kwargs)
+        try:
+            self.itemId = random.randint(0,1000000)
+        except:
+            save(self, *args, **kwargs)
         super(Item, self).save(*args, **kwargs)
 
     def __str__(self):
