@@ -24,6 +24,8 @@
 			{% else %}
 			<a href="{% url 'addWatchlist' item.itemId %}" class="itemlink">Add To Watchlist</a>
 			{% endif %}
+		{% else %}
+			<i>You must be logged in to add to a watchlist.</i>
 		{% endif %}
 	</div>
 	
