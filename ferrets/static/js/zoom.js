@@ -1,8 +1,8 @@
 $(document).ready(function(){
 	var curWidth=$('#zoom').css('width'); //gets default width of image
 	var curHeight=$('#zoom').css('height'); //gets default height of image
-	var biganim=false; //safety for embiggening
-	var smallanim=false; //safety for ensmallening
+	var biganim=false; //safety for making bigger
+	var smallanim=false; //safety for making smaller
 	
 	$('#zoom').hover(function(event){
 		//while mouse is over image, make it bigger
@@ -24,6 +24,6 @@ $(document).ready(function(){
 			height: curHeight},
 			"slow",
 			"swing",
-			function(){ smallanim=false; });
+			function(){ smallanim=false; }); //once animation is over, tell boolean we've stopped 
 	});
 });
