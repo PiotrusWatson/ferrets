@@ -111,3 +111,5 @@ build/
 tests/report/
 
 *.db
+
+migrations/
