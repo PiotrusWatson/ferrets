@@ -31,9 +31,7 @@ This is the page content
 	<div id = "watchlist">
 	{% if watchlist %}
 		{% for item in watchlist %}
-		<a href="{% url 'showItem' item.itemId %}">
-			<img class = "cropandreduce" src = "{{ item.picture.url }}" alt = "{{ item.item_name }}" width = 200px height = 200px\>
-		</a>
+		<img class = "cropandreduce" src = "{{ item.picture.url }}" alt = "{{ item.item_name }}" width = 200px height = 200px\>
 		{% endfor %}
 	</div>
 	{% else %}

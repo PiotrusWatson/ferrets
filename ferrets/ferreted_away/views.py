@@ -244,7 +244,7 @@ def showItem(request, item_itemId):
         item.views = item.views + 1
         item.save()
         #if logged in, modify comments based on specific things
-        if request.user.is_authenticated:
+        if request.user.is_authenticated():
 
             logged_in = True
             #displaying comments
