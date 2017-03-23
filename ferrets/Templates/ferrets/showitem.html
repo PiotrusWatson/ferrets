@@ -17,7 +17,7 @@
 		{% if seller %}
 			<a href="{% url 'deleteItem' item.itemId %}" class="itemlink">Delete Item</a>
 		{% endif %}
-		
+		<br />
 		{% if logged %}
 			{% if inWatchlist %}
 			<a href="{% url 'removeWatchlist' item.itemId %}" class="itemlink">Remove From Watchlist</a>
