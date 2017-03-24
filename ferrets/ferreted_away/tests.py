@@ -56,7 +56,26 @@ class ModelTests(TestCase):
 		user = self.get_user('fredrick')
 		self.assertIsNotNone(user)
 		
-class ViewsTests(TestCase):	
+class ViewsTests(TestCase):
+	def setUp(self):
+		try:
+			from population_script import populate
+			populate()
+		except ImportError:
+			print('The module population_script does not exist')
+		except NameError:
+			print('The function populate() does not exist')
+		except:
+			print('Undisclosed error')
+
+	def get_item(self, name):
+		from ferreted_away.models import Item
+		try:
+			item = Item.objects.get(item_name=name)
+		except Item.DoesNotExist:
+			item = None
+		return item
+		
 	def test_home_load_correctly(self):
 		response = self.client.get(reverse('home'))
 		self.assertEquals(response.status_code, 200)
@@ -92,6 +111,35 @@ class ViewsTests(TestCase):
 	def test_myaccount_wont_load_if_not_logged_in(self):
 		response = self.client.get(reverse('myAccount'))
 		self.assertEquals(response.status_code, 302)
+		
+	def test_myitems_wont_load_if_not_logged_in(self):
+		response = self.client.get(reverse('myItems'))
+		self.assertEquals(response.status_code, 302)
+		
+	def test_additem_wont_load_if_not_logged_in(self):
+		username = 'fredrick'
+		response = self.client.get(reverse('addItems', args=[username]))
+		self.assertEquals(response.status_code, 302)
+		
+	def test_mywatchlist_wont_load_if_not_logged_in(self):
+		response = self.client.get(reverse('myWatchlist'))
+		self.assertEquals(response.status_code, 302)
+		
+	def test_category_load_correctly(self):
+		response = self.client.get(reverse('categories'))
+		self.assertEquals(response.status_code, 200)
+		
+	def test_showcategory_load_correctly(self):
+		response = self.client.get(reverse('showCategory', args=['Transport']))
+		self.assertEquals(response.status_code, 200)
+		
+	def test_item_load_correctly(self):
+		item = self.get_item('Private Jet')
+		id = item.itemId
+		response = self.client.get(reverse('showItem', args=[id]))
+		self.assertEquals(response.status_code, 200)
+		
+	
 		
 	
 		
