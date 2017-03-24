@@ -1,8 +1,6 @@
 from django.test import TestCase
 from ferreted_away.models import *
-"""
-https://github.com/leifos/tango_with_django_19/blob/master/code/tango_with_django_project/rango/tests.py
-"""
+from django.urls import reverse
 
 class ModelTests(TestCase):
 	def setUp(self):
@@ -57,4 +55,47 @@ class ModelTests(TestCase):
 	def test_is_user_added(self):
 		user = self.get_user('fredrick')
 		self.assertIsNotNone(user)
+		
+class ViewsTests(TestCase):	
+	def test_home_load_correctly(self):
+		response = self.client.get(reverse('home'))
+		self.assertEquals(response.status_code, 200)
+	
+	def test_about_load_correctly(self):
+		response = self.client.get(reverse('about'))
+		self.assertEquals(response.status_code, 200)
+		
+	def test_faq_load_correctly(self):
+		response = self.client.get(reverse('faq'))
+		self.assertEquals(response.status_code, 200)
+		
+	def test_contact_load_correctly(self):
+		response = self.client.get(reverse('contact'))
+		self.assertEquals(response.status_code, 200)
+		
+	def test_sitemap_load_correctly(self):
+		response = self.client.get(reverse('sitemap'))
+		self.assertEquals(response.status_code, 200)
+		
+	def test_login_load_correctly(self):
+		response = self.client.get(reverse('login'))
+		self.assertEquals(response.status_code, 200)
+		
+	def test_logout_wont_load_if_not_logged_in(self):
+		response = self.client.get(reverse('logout'))
+		self.assertEquals(response.status_code, 302)
+		
+	def test_addaccount_load_correctly(self):
+		response = self.client.get(reverse('addAccount'))
+		self.assertEquals(response.status_code, 200)
+		
+	def test_myaccount_wont_load_if_not_logged_in(self):
+		response = self.client.get(reverse('myAccount'))
+		self.assertEquals(response.status_code, 302)
+		
+	
+		
+	
+		
+	
 			
