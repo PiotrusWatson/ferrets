@@ -58,6 +58,38 @@ class ModelTests(TestCase):
 		user = self.get_user('fredrick')
 		self.assertIsNotNone(user)
 		
+	def get_watchlist(self, username):
+		from ferreted_away.models import Watchlist
+		try:
+			watch = Watchlist.objects.get(user=username)
+		except Watchlist.DoesNotExist:
+			watch = None
+		return watch
+		
+	def get_comment(self, username):
+		from ferreted_away.models import Comments
+		try:
+			comment = Comments.objects.get(user=username)
+		except Comments.DoesNotExist:
+			comment = None
+		return comment
+	
+	def test_watchlist_is_added(self):
+		wuser = self.get_user('fredrick')
+		item = self.get_item('Batcave')
+		w = Watchlist(item=item.itemId, user=wuser)
+		w.save()
+		watch = self.get_watchlist(wuser)
+		self.assertIsNotNone(watch)
+	
+	def test_comment_is_added(self):
+		cuser = self.get_user('fredrick')
+		item = self.get_item('Batcave')
+		c = Comments(user=cuser, item=item, comment='words')
+		c.save()
+		comment = self.get_comment(cuser)
+		self.assertIsNotNone(comment)
+
 class ViewsTests(TestCase):
 	def setUp(self):
 		self.client = Client()
