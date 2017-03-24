@@ -1,4 +1,4 @@
-from django.test import TestCase
+from django.test import TestCase, Client
 from ferreted_away.models import *
 from django.urls import reverse
 
@@ -58,6 +58,7 @@ class ModelTests(TestCase):
 		
 class ViewsTests(TestCase):
 	def setUp(self):
+		self.client = Client()
 		try:
 			from population_script import populate
 			populate()
@@ -139,6 +140,43 @@ class ViewsTests(TestCase):
 		response = self.client.get(reverse('showItem', args=[id]))
 		self.assertEquals(response.status_code, 200)
 		
+	def test_pricerange_load_correctly(self):
+		response = self.client.get(reverse('priceRange', args=[0]))
+		self.assertEquals(response.status_code, 200)
+		
+	def test_browseprice_load_correctly(self):
+		response = self.client.get(reverse('browsePrice'))
+		self.assertEquals(response.status_code, 200)
+		
+	def test_delete_wont_load_if_not_logged_in(self):
+		item = self.get_item('Private Jet')
+		id = item.itemId
+		response = self.client.get(reverse('deleteItem', args=[id]))
+		self.assertEquals(response.status_code, 302)
+		
+	def test_addwatchlist_wont_load_if_not_logged_in(self):
+		item = self.get_item('Private Jet')
+		id = item.itemId
+		response = self.client.get(reverse('addWatchlist', args=[id]))
+		self.assertEquals(response.status_code, 302)
+		
+	def test_removewatchlist_wont_load_if_not_logged_in(self):
+		item = self.get_item('Private Jet')
+		id = item.itemId
+		response = self.client.get(reverse('removeWatchlist', args=[id]))
+		self.assertEquals(response.status_code, 302)
+		
+	def test_searchresults_load_correctly(self):
+		response = self.client.get(reverse('searchresults'))
+		self.assertEquals(response.status_code, 200)
+		
+	def test_verify_load_correctly(self):
+		response = self.client.get(reverse('verify'))
+		self.assertEquals(response.status_code, 200)
+		
+	
+		
+	
 	
 		
 	
